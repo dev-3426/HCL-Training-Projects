@@ -1,0 +1,224 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\services\\rentalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\services\\rentalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\payments\\paymentprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\payments\\paymentprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\payments\\ipaymentprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\payments\\ipaymentprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\contracts\\carrental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\contracts\\carrental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\contracts\\bikerental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\contracts\\bikerental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\models\\rentalcontract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\models\\rentalcontract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\models\\rentalsummaryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\models\\rentalsummaryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\models\\rentalsummary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\models\\rentalsummary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\models\\rentalperiod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\models\\rentalperiod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\models\\renter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\models\\renter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|e:\\demo_consoleapp\\vehiclerentalsystem\\vehiclerentalsystem\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F62BE85-5D91-4A57-A1D1-8CC88D9DFA4B}|VehicleRentalSystem\\VehicleRentalSystem.csproj|solutionrelative:vehiclerentalsystem\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RentalContract.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\RentalContract.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Models\\RentalContract.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\RentalContract.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Models\\RentalContract.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwDUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:40:28.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CarRental.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Contracts\\CarRental.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Contracts\\CarRental.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Contracts\\CarRental.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Contracts\\CarRental.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:41:21.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BikeRental.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Contracts\\BikeRental.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Contracts\\BikeRental.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Contracts\\BikeRental.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Contracts\\BikeRental.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:41:40.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IPaymentProcessor.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Payments\\IPaymentProcessor.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Payments\\IPaymentProcessor.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Payments\\IPaymentProcessor.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Payments\\IPaymentProcessor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:43:44.981Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PaymentProcessor.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Payments\\PaymentProcessor.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Payments\\PaymentProcessor.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Payments\\PaymentProcessor.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Payments\\PaymentProcessor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:44:05.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RentalService.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Services\\RentalService.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Services\\RentalService.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Services\\RentalService.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Services\\RentalService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:42:22.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Program.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Program.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Program.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Program.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwCsBAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:37:24.649Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RentalSummaryInfo.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\RentalSummaryInfo.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Models\\RentalSummaryInfo.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\RentalSummaryInfo.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Models\\RentalSummaryInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:48:13.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RentalPeriod.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\RentalPeriod.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Models\\RentalPeriod.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\RentalPeriod.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Models\\RentalPeriod.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:39:23.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Renter.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\Renter.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Models\\Renter.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\Renter.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Models\\Renter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:39:06.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Vehicle.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\Vehicle.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Models\\Vehicle.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\Vehicle.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Models\\Vehicle.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:38:48.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RentalSummary.cs",
+              "DocumentMoniker": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\RentalSummary.cs",
+              "RelativeDocumentMoniker": "VehicleRentalSystem\\Models\\RentalSummary.cs",
+              "ToolTip": "E:\\Demo_Consoleapp\\VehicleRentalSystem\\VehicleRentalSystem\\Models\\RentalSummary.cs",
+              "RelativeToolTip": "VehicleRentalSystem\\Models\\RentalSummary.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T17:39:55.825Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

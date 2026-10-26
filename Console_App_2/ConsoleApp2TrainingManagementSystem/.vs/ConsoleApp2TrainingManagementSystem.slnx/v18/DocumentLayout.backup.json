@@ -1,0 +1,317 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\exceptions\\invalidlearnerid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\exceptions\\invalidlearnerid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\models\\enrollmentstatus.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\models\\enrollmentstatus.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\services\\learnerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\services\\learnerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\services\\coursefilterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\services\\coursefilterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\services\\enrollmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\services\\enrollmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\services\\feecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\services\\feecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\services\\courseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\services\\courseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\models\\learner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\models\\learner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\models\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\models\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\models\\paymentstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\models\\paymentstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\payments\\onlinepaymentprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\payments\\onlinepaymentprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\payments\\ipaymentprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\payments\\ipaymentprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|e:\\console_app_2\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B8B63F49-2DD2-3547-EA4C-5B5B83A0BFD2}|ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj|solutionrelative:consoleapp2trainingmanagementsystem\\consoleapp2trainingmanagementsystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Course.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\Course.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Models\\Course.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\Course.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Models\\Course.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T08:50:15.529Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Program.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Program.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Program.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T08:48:58.312Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CourseFilterService.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\CourseFilterService.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Services\\CourseFilterService.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\CourseFilterService.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Services\\CourseFilterService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T16:30:42.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LearnerService.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\LearnerService.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Services\\LearnerService.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\LearnerService.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Services\\LearnerService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAJAAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T15:17:59.305Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Models\\Payment.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\Payment.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Models\\Payment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T17:24:00.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EnrollmentStatus.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\EnrollmentStatus.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Models\\EnrollmentStatus.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\EnrollmentStatus.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Models\\EnrollmentStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T09:58:18.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InvalidLearnerId.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Exceptions\\InvalidLearnerId.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Exceptions\\InvalidLearnerId.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Exceptions\\InvalidLearnerId.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Exceptions\\InvalidLearnerId.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-15T04:40:38.386Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EnrollmentService.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\EnrollmentService.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Services\\EnrollmentService.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\EnrollmentService.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Services\\EnrollmentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T10:00:16.234Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FeeCalculator.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\FeeCalculator.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Services\\FeeCalculator.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\FeeCalculator.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Services\\FeeCalculator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T17:25:26.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Enrollment.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\Enrollment.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Models\\Enrollment.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\Enrollment.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Models\\Enrollment.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAUwBsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T08:51:16.164Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Learner.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\Learner.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Models\\Learner.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\Learner.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Models\\Learner.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAnwAsAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T08:50:50.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CourseService.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\CourseService.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Services\\CourseService.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\CourseService.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Services\\CourseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T15:17:40.628Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PaymentStatus.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\PaymentStatus.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Models\\PaymentStatus.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Models\\PaymentStatus.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Models\\PaymentStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T17:20:39.724Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "OnlinePaymentProcessor.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Payments\\OnlinePaymentProcessor.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Payments\\OnlinePaymentProcessor.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Payments\\OnlinePaymentProcessor.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Payments\\OnlinePaymentProcessor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T17:34:16.623Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "IPaymentProcessor.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Payments\\IPaymentProcessor.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Payments\\IPaymentProcessor.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Payments\\IPaymentProcessor.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Payments\\IPaymentProcessor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T17:26:35.448Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Repositories\\Repository.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Repositories\\Repository.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Repositories\\Repository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T16:08:51.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "PaymentService.cs",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\PaymentService.cs",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\Services\\PaymentService.cs",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\Services\\PaymentService.cs",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\Services\\PaymentService.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAmwF0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T17:43:17.029Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ConsoleApp2TrainingManagementSystem.csproj",
+              "DocumentMoniker": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj",
+              "RelativeDocumentMoniker": "ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj",
+              "ToolTip": "E:\\Console_App_2\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj",
+              "RelativeToolTip": "ConsoleApp2TrainingManagementSystem\\ConsoleApp2TrainingManagementSystem.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-14T16:12:07.01Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

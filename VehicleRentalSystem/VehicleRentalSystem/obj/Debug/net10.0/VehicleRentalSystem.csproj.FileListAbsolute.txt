@@ -1,0 +1,15 @@
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\bin\Debug\net10.0\VehicleRentalSystem.exe
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\bin\Debug\net10.0\VehicleRentalSystem.deps.json
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\bin\Debug\net10.0\VehicleRentalSystem.runtimeconfig.json
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\bin\Debug\net10.0\VehicleRentalSystem.dll
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\bin\Debug\net10.0\VehicleRentalSystem.pdb
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\VehicleRentalSystem.GeneratedMSBuildEditorConfig.editorconfig
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\VehicleRentalSystem.AssemblyInfoInputs.cache
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\VehicleRentalSystem.AssemblyInfo.cs
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\VehicleRentalSystem.csproj.CoreCompileInputs.cache
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\VehicleRentalSystem.dll
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\refint\VehicleRentalSystem.dll
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\VehicleRentalSystem.pdb
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\VehicleRentalSystem.genruntimeconfig.cache
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\ref\VehicleRentalSystem.dll
+E:\Demo_Consoleapp\VehicleRentalSystem\VehicleRentalSystem\obj\Debug\net10.0\VehicleR.157AD715.Up2Date

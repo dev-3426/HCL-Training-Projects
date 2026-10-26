@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Train_Manage_Integ\\TrainingManagementWebAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B660869B-CD67-3FB5-FBE5-E3D37E21005E}|TrainingManagementWebAPI\\TrainingManagementWebAPI.csproj|e:\\train_manage_integ\\trainingmanagementwebapi\\trainingmanagementwebapi\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B660869B-CD67-3FB5-FBE5-E3D37E21005E}|TrainingManagementWebAPI\\TrainingManagementWebAPI.csproj|solutionrelative:trainingmanagementwebapi\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B660869B-CD67-3FB5-FBE5-E3D37E21005E}|TrainingManagementWebAPI\\TrainingManagementWebAPI.csproj|e:\\train_manage_integ\\trainingmanagementwebapi\\trainingmanagementwebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B660869B-CD67-3FB5-FBE5-E3D37E21005E}|TrainingManagementWebAPI\\TrainingManagementWebAPI.csproj|solutionrelative:trainingmanagementwebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "index.html",
+              "DocumentMoniker": "E:\\Train_Manage_Integ\\TrainingManagementWebAPI\\TrainingManagementWebAPI\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "TrainingManagementWebAPI\\wwwroot\\index.html",
+              "ToolTip": "E:\\Train_Manage_Integ\\TrainingManagementWebAPI\\TrainingManagementWebAPI\\wwwroot\\index.html",
+              "RelativeToolTip": "TrainingManagementWebAPI\\wwwroot\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-10-23T03:39:40.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Train_Manage_Integ\\TrainingManagementWebAPI\\TrainingManagementWebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "TrainingManagementWebAPI\\Program.cs",
+              "ToolTip": "E:\\Train_Manage_Integ\\TrainingManagementWebAPI\\TrainingManagementWebAPI\\Program.cs",
+              "RelativeToolTip": "TrainingManagementWebAPI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T17:37:25.113Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

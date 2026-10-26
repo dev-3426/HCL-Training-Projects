@@ -1,0 +1,6 @@
+wwwroot\style.css
+wwwroot\index.html
+wwwroot\script.js
+E:\Train_Manage_Integ\TrainingManagementWebAPI\TrainingManagementWebAPI\wwwroot\index.html
+E:\Train_Manage_Integ\TrainingManagementWebAPI\TrainingManagementWebAPI\wwwroot\script.js
+E:\Train_Manage_Integ\TrainingManagementWebAPI\TrainingManagementWebAPI\wwwroot\style.css

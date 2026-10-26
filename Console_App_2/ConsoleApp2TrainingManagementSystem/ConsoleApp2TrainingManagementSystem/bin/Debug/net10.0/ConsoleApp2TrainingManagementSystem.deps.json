@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "ConsoleApp2TrainingManagementSystem/1.0.0": {
+        "runtime": {
+          "ConsoleApp2TrainingManagementSystem.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ConsoleApp2TrainingManagementSystem/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

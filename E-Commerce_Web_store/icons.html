@@ -1,0 +1,50 @@
+<section class="container py-5">
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="shipping-card" onclick="showInfo('order')">
+                <i class="bi bi-box-seam"></i>
+                <h5>Order Processing</h5>
+                <p>Check your order status</p>
+                <span>View Details →</span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="shipping-card" onclick="showInfo('delivery')">
+                <i class="bi bi-truck"></i>
+                <h5>Delivery Times</h5>
+                <p>Know when your parcel arrives</p>
+                <span>View Details →</span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="shipping-card" onclick="showInfo('location')">
+                <i class="bi bi-geo-alt"></i>
+                <h5>Delivery Location</h5>
+                <p>Check delivery availability</p>
+                <span>View Details →</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Popup Modal -->
+<div class="modal fade" id="shippingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shipping-modal">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">
+                    Shipping Information
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body" id="modalBody"></div>
+
+        </div>
+    </div>
+</div>

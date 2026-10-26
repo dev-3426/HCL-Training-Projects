@@ -1,0 +1,80 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Training Management System</h1>
+        <p>Manage courses, learners and enrollments</p>
+    </header>
+
+    <nav>
+        <button onclick="showSection('courses')">Courses</button>
+        <button onclick="showSection('learners')">Learners</button>
+        <button onclick="showSection('enrollments')">Enrollments</button>
+    </nav>
+
+    <main>
+        <section id="courses">
+            <h2>Available Courses</h2>
+
+            <button onclick="loadCourses()">All Courses</button>
+            <button onclick="loadAffordable()">Fees Below ₹5,000</button>
+            <button onclick="loadSorted()">Sort by Fee</button>
+
+            <p id="courseMessage"></p>
+            <div id="courseList" class="cards"></div>
+        </section>
+
+        <section id="learners" hidden>
+            <h2>Register Learner</h2>
+
+            <form id="learnerForm">
+                <input id="learnerId" placeholder="Learner ID" required>
+                <input id="learnerName" placeholder="Full Name" required>
+                <input id="contactNumber" placeholder="10-digit Contact Number"
+                       inputmode="numeric" required>
+                <input id="email" type="email" placeholder="Email" required>
+                <button type="submit">Register Learner</button>
+            </form>
+
+            <p id="learnerMessage"></p>
+
+            <h3>Registered Learners</h3>
+            <button onclick="loadLearners()">Refresh Learners</button>
+            <div id="learnerList"></div>
+        </section>
+
+        <section id="enrollments" hidden>
+            <h2>Enroll a Learner</h2>
+
+            <form id="enrollmentForm">
+                <input id="enrollLearnerId"
+                       placeholder="Learner ID" required>
+
+                <input id="enrollCourseCode"
+                       placeholder="Course Code (e.g. CS101)" required>
+
+                <button type="submit">Enroll</button>
+            </form>
+
+            <p id="enrollmentMessage"></p>
+
+            <h3>Enrollment History</h3>
+            <button onclick="loadEnrollments()">Refresh Enrollments</button>
+            <div id="enrollmentList"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Training Management System</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
