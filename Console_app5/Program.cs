@@ -94,7 +94,7 @@ public class LearnAsyncProgramming
 
         Console.WriteLine("Both operations have been started");
 
-        await Task.WhenAll(fileA, fileB);
+        await Task.WhenAny(fileA, fileB);
 
         sw.Stop();
 
