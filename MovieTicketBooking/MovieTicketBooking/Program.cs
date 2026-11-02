@@ -28,6 +28,9 @@ builder.Services.AddScoped<ISeatService, SeatService>();
 builder.Services.AddScoped<IShowRepository, ShowRepository>();
 builder.Services.AddScoped<IShowService, ShowService>();
 
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+
 
 // Configure Entity Framework Core with SQL Server
 var connectionString =
