@@ -6,6 +6,7 @@ using MovieTicketBooking.Services;
 using MovieTicketBooking.Services.Interfaces;
 
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Register controllers
@@ -14,6 +15,16 @@ builder.Services.AddControllers();
 // Movie Management dependency registrations
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+// Theatre Management
+builder.Services.AddScoped<ITheatreRepository, TheatreRepository>();
+builder.Services.AddScoped<ITheatreService, TheatreService>();
+
+builder.Services.AddScoped<IScreenRepository, ScreenRepository>();
+builder.Services.AddScoped<IScreenService, ScreenService>();
+
+builder.Services.AddScoped<ISeatRepository, SeatRepository>();
+builder.Services.AddScoped<ISeatService, SeatService>();
+
 
 // Configure Entity Framework Core with SQL Server
 var connectionString =
