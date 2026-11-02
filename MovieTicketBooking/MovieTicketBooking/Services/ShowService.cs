@@ -3,6 +3,7 @@ using MovieTicketBooking.DTOs.Shows;
 using MovieTicketBooking.Models;
 using MovieTicketBooking.Repositories.Interfaces;
 using MovieTicketBooking.Services.Interfaces;
+using MovieTicketBooking.Exceptions;
 
 namespace MovieTicketBooking.Services;
 
@@ -26,22 +27,22 @@ public class ShowService : IShowService
     public async Task<ShowResponse> CreateAsync(CreateShowRequest request)
     {
         if (request.EndTime <= request.StartTime)
-            throw new InvalidOperationException(
+            throw new ValidationException(
                 "End time must be later than start time.");
 
         if (request.TicketPrice < 0)
-            throw new InvalidOperationException(
+            throw new ValidationException(
                 "Ticket price cannot be negative.");
 
         var movie = await _movieRepository.GetByIdAsync(request.MovieId);
 
         if (movie == null)
-            throw new InvalidOperationException("Movie not found.");
+            throw new NotFoundException("Movie not found.");
 
         var screen = await _screenRepository.GetByIdAsync(request.ScreenId);
 
         if (screen == null)
-            throw new InvalidOperationException("Screen not found.");
+            throw new NotFoundException("Screen not found.");
 
         bool hasOverlap = await _showRepository.HasOverlapAsync(
             request.ScreenId,
@@ -49,7 +50,7 @@ public class ShowService : IShowService
             request.EndTime);
 
         if (hasOverlap)
-            throw new InvalidOperationException(
+            throw new ConflictException(
                 "Another show is already scheduled for this screen during this time.");
 
         // Get all physical seats belonging to this screen.
@@ -57,7 +58,7 @@ public class ShowService : IShowService
             request.ScreenId);
 
         if (seats.Count == 0)
-            throw new InvalidOperationException(
+            throw new ConflictException(
                 "Cannot schedule a show because this screen has no seats.");
 
         var show = new Show
@@ -110,9 +111,15 @@ public class ShowService : IShowService
         var show = await _showRepository.GetByIdAsync(showId);
 
         if (show == null)
-            return false;
+            throw new NotFoundException("Show not found. Cannot delete.");
 
-        return await _showRepository.DeleteAsync(showId);
+        bool isDeleted = await _showRepository.DeleteAsync(showId);
+
+        if (!isDeleted)
+            throw new ConflictException(
+                "Show could not be deleted. It may have related bookings.");
+
+        return true;
     }
 
     // GET ALL SEATS FOR A SHOW
@@ -121,7 +128,7 @@ public class ShowService : IShowService
         var show = await _showRepository.GetByIdAsync(showId);
 
         if (show == null)
-            throw new InvalidOperationException("Show not found.");
+            throw new NotFoundException("Show not found.");
 
         var showSeats = await _showRepository.GetShowSeatsAsync(showId);
 
@@ -189,20 +196,20 @@ public class ShowService : IShowService
         var existingShow = await _showRepository.GetByIdAsync(showId);
 
         if (existingShow == null)
-            return null;
+            throw new NotFoundException("Show not found. Cannot update.");
 
         if (request.EndTime <= request.StartTime)
-            throw new InvalidOperationException(
+            throw new ValidationException(
                 "End time must be later than start time.");
 
         if (request.TicketPrice < 0)
-            throw new InvalidOperationException(
+            throw new ValidationException(
                 "Ticket price cannot be negative.");
 
         var movie = await _movieRepository.GetByIdAsync(request.MovieId);
 
         if (movie == null)
-            throw new InvalidOperationException("Movie not found.");
+            throw new NotFoundException("Movie not found.");
 
         // Keep the original screen because ShowSeats are linked to its seats.
         bool hasOverlap = await _showRepository.HasOverlapAsync(
@@ -212,7 +219,7 @@ public class ShowService : IShowService
             showId);
 
         if (hasOverlap)
-            throw new InvalidOperationException(
+            throw new ConflictException(
                 "Another show is already scheduled for this screen during this time.");
 
         existingShow.MovieId = request.MovieId;
@@ -222,7 +229,10 @@ public class ShowService : IShowService
 
         var updatedShow = await _showRepository.UpdateAsync(existingShow);
 
-        return updatedShow == null ? null : MapToResponse(updatedShow);
+        if (updatedShow == null)
+            throw new NotFoundException("Show not found. Cannot update.");
+
+        return MapToResponse(updatedShow);
     }
 
     // MAP SHOW ENTITY TO RESPONSE DTO

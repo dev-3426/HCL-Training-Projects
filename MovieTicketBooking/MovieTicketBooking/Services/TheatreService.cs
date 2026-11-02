@@ -3,6 +3,7 @@ using MovieTicketBooking.DTOs.Theatres;
 using MovieTicketBooking.Models;
 using MovieTicketBooking.Repositories.Interfaces;
 using MovieTicketBooking.Services.Interfaces;
+using MovieTicketBooking.Exceptions;
 
 namespace MovieTicketBooking.Services;
 
@@ -67,7 +68,10 @@ public class TheatreService : ITheatreService
             await _theatreRepository.UpdateAsync(theatre);
 
         if (updatedTheatre == null)
-            return null;
+        {
+            throw new NotFoundException(
+                "Theatre not found. Cannot update.");
+        }
 
         return MapToResponse(updatedTheatre);
     }
@@ -75,7 +79,16 @@ public class TheatreService : ITheatreService
     // Delete theatre
     public async Task<bool> DeleteAsync(int theatreId)
     {
-        return await _theatreRepository.DeleteAsync(theatreId);
+        var isDeleted =
+            await _theatreRepository.DeleteAsync(theatreId);
+
+        if (!isDeleted)
+        {
+            throw new NotFoundException(
+                "Theatre not found. Cannot delete.");
+        }
+
+        return true;
     }
 
     // Convert Entity into Response DTO

@@ -1,7 +1,9 @@
-﻿using MovieTicketBooking.DTOs.Bookings;
+﻿
+using MovieTicketBooking.DTOs.Bookings;
 using MovieTicketBooking.Models;
 using MovieTicketBooking.Repositories.Interfaces;
 using MovieTicketBooking.Services.Interfaces;
+using MovieTicketBooking.Exceptions;
 
 namespace MovieTicketBooking.Services;
 
@@ -18,58 +20,64 @@ public class BookingService : IBookingService
     public async Task<BookingResponse> CreateAsync(
         CreateBookingRequest request)
     {
+        // Validate selected seats
         if (request.SeatIds == null || request.SeatIds.Count == 0)
         {
-            throw new InvalidOperationException(
+            throw new ValidationException(
                 "Select at least one seat.");
         }
 
         if (request.SeatIds.Any(id => id <= 0))
         {
-            throw new InvalidOperationException(
+            throw new ValidationException(
                 "Invalid seat ID.");
         }
 
         if (request.SeatIds.Distinct().Count() != request.SeatIds.Count)
         {
-            throw new InvalidOperationException(
+            throw new ValidationException(
                 "Duplicate seat IDs are not allowed.");
         }
 
+        // Validate show
         var show = await _bookingRepository
             .GetShowByIdAsync(request.ShowId);
 
         if (show == null)
         {
-            throw new InvalidOperationException("Show not found.");
+            throw new NotFoundException("Show not found.");
         }
 
+        // Retrieve selected seats belonging to this show
         var showSeats = await _bookingRepository
             .GetShowSeatsAsync(request.ShowId, request.SeatIds);
 
         if (showSeats.Count != request.SeatIds.Count)
         {
-            throw new InvalidOperationException(
+            throw new ValidationException(
                 "One or more selected seats do not belong to this show.");
         }
 
+        // Check seat availability
         if (showSeats.Any(seat => seat.Status != "Available"))
         {
-            throw new InvalidOperationException(
+            throw new ConflictException(
                 "One or more selected seats are already booked.");
         }
 
+        // Calculate total booking amount
         decimal totalAmount = show.TicketPrice * showSeats.Count;
 
+        // Create booking entity
         var booking = new Booking
         {
             BookingReference = "MOV" +
                 Guid.NewGuid().ToString("N")[..12].ToUpper(),
 
             ShowId = request.ShowId,
-            CustomerName = request.CustomerName,
-            CustomerEmail = request.CustomerEmail,
-            CustomerPhone = request.CustomerPhone,
+            CustomerName = request.CustomerName.Trim(),
+            CustomerEmail = request.CustomerEmail.Trim(),
+            CustomerPhone = request.CustomerPhone.Trim(),
             BookingDate = DateTime.UtcNow,
             TotalAmount = totalAmount,
             Status = "Confirmed",
@@ -96,9 +104,7 @@ public class BookingService : IBookingService
             .GetByIdAsync(bookingId);
 
         if (booking == null)
-        {
             return null;
-        }
 
         return MapToResponse(booking);
     }
@@ -108,8 +114,14 @@ public class BookingService : IBookingService
         int? showId,
         string? status)
     {
+        if (showId.HasValue && showId.Value <= 0)
+        {
+            throw new ValidationException(
+                "Show ID must be greater than zero.");
+        }
+
         var bookings = await _bookingRepository
-            .GetAllAsync(showId, status);
+            .GetAllAsync(showId, status?.Trim());
 
         return bookings
             .Select(MapToResponse)
@@ -120,6 +132,12 @@ public class BookingService : IBookingService
     public async Task<List<BookingResponse>> GetByShowIdAsync(
         int showId)
     {
+        if (showId <= 0)
+        {
+            throw new ValidationException(
+                "Show ID must be greater than zero.");
+        }
+
         var bookings = await _bookingRepository
             .GetByShowIdAsync(showId);
 
@@ -131,17 +149,23 @@ public class BookingService : IBookingService
     // Cancel booking
     public async Task<BookingResponse?> CancelAsync(int bookingId)
     {
+        if (bookingId <= 0)
+        {
+            throw new ValidationException(
+                "Booking ID must be greater than zero.");
+        }
+
         var existingBooking = await _bookingRepository
             .GetByIdAsync(bookingId);
 
         if (existingBooking == null)
         {
-            return null;
+            throw new NotFoundException("Booking not found.");
         }
 
         if (existingBooking.Status != "Confirmed")
         {
-            throw new InvalidOperationException(
+            throw new ConflictException(
                 "Only confirmed bookings can be cancelled.");
         }
 
@@ -150,7 +174,7 @@ public class BookingService : IBookingService
 
         if (cancelledBooking == null)
         {
-            return null;
+            throw new NotFoundException("Booking not found.");
         }
 
         return MapToResponse(cancelledBooking);
