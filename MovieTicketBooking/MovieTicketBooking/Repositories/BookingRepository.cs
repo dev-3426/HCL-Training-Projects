@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using MovieTicketBooking.Data;
 using MovieTicketBooking.Models;
 using MovieTicketBooking.Repositories.Interfaces;
@@ -64,7 +65,7 @@ public class BookingRepository : IBookingRepository
         }
     }
 
-    // Get booking by ID
+    // Admin: Get booking by ID
     public async Task<Booking?> GetByIdAsync(int bookingId)
     {
         return await _context.Bookings
@@ -74,7 +75,21 @@ public class BookingRepository : IBookingRepository
             .FirstOrDefaultAsync(b => b.BookingId == bookingId);
     }
 
-    // Get all bookings with optional filters
+    // Customer: Get booking by ID only if it belongs to them
+    public async Task<Booking?> GetByIdForUserAsync(
+        int bookingId,
+        int userId)
+    {
+        return await _context.Bookings
+            .AsNoTracking()
+            .Include(b => b.BookingSeats)
+                .ThenInclude(bs => bs.Seat)
+            .FirstOrDefaultAsync(b =>
+                b.BookingId == bookingId &&
+                b.UserId == userId);
+    }
+
+    // Admin: Get all bookings with optional filters
     public async Task<List<Booking>> GetAllAsync(
         int? showId,
         string? status)
@@ -100,7 +115,7 @@ public class BookingRepository : IBookingRepository
             .ToListAsync();
     }
 
-    // Get bookings for a particular show
+    // Admin: Get bookings for a particular show
     public async Task<List<Booking>> GetByShowIdAsync(int showId)
     {
         return await _context.Bookings
@@ -112,18 +127,54 @@ public class BookingRepository : IBookingRepository
             .ToListAsync();
     }
 
-    // Cancel booking and release seats
+    // Customer: Get only their own bookings
+    public async Task<List<Booking>> GetByUserIdAsync(int userId)
+    {
+        return await _context.Bookings
+            .AsNoTracking()
+            .Include(b => b.BookingSeats)
+                .ThenInclude(bs => bs.Seat)
+            .Where(b => b.UserId == userId)
+            .OrderByDescending(b => b.BookingDate)
+            .ToListAsync();
+    }
+
+    // Admin: Cancel any booking
     public async Task<Booking?> CancelAsync(int bookingId)
+    {
+        return await CancelBookingInternalAsync(bookingId, null);
+    }
+
+    // Customer: Cancel only their own booking
+    public async Task<Booking?> CancelForUserAsync(
+        int bookingId,
+        int userId)
+    {
+        return await CancelBookingInternalAsync(bookingId, userId);
+    }
+
+    // Shared cancellation logic
+    private async Task<Booking?> CancelBookingInternalAsync(
+        int bookingId,
+        int? userId)
     {
         await using var transaction =
             await _context.Database.BeginTransactionAsync();
 
         try
         {
-            var booking = await _context.Bookings
+            var query = _context.Bookings
                 .Include(b => b.BookingSeats)
-                .ThenInclude(bs => bs.Seat)
-                .FirstOrDefaultAsync(b => b.BookingId == bookingId);
+                    .ThenInclude(bs => bs.Seat)
+                .Where(b => b.BookingId == bookingId);
+
+            // Apply ownership filter for customer cancellation
+            if (userId.HasValue)
+            {
+                query = query.Where(b => b.UserId == userId.Value);
+            }
+
+            var booking = await query.FirstOrDefaultAsync();
 
             if (booking == null)
             {

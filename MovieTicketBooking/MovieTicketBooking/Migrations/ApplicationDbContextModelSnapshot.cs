@@ -57,7 +57,11 @@ namespace MovieTicketBooking.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("TotalAmount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("BookingId");
 
@@ -65,6 +69,8 @@ namespace MovieTicketBooking.Migrations
                         .IsUnique();
 
                     b.HasIndex("ShowId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Bookings", t =>
                         {
@@ -84,6 +90,7 @@ namespace MovieTicketBooking.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("SeatId")
@@ -209,11 +216,14 @@ namespace MovieTicketBooking.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TicketPrice")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ShowId");
 
                     b.HasIndex("MovieId");
+
+                    b.HasIndex("ScreenId");
 
                     b.ToTable("Shows", t =>
                         {
@@ -272,70 +282,183 @@ namespace MovieTicketBooking.Migrations
                     b.ToTable("Theatres");
                 });
 
+            modelBuilder.Entity("MovieTicketBooking.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("MovieTicketBooking.Models.Booking", b =>
                 {
-                    b.HasOne("MovieTicketBooking.Models.Show", null)
-                        .WithMany()
+                    b.HasOne("MovieTicketBooking.Models.Show", "Show")
+                        .WithMany("Bookings")
                         .HasForeignKey("ShowId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("MovieTicketBooking.Models.User", "User")
+                        .WithMany("Bookings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Show");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MovieTicketBooking.Models.BookingSeat", b =>
                 {
-                    b.HasOne("MovieTicketBooking.Models.Booking", null)
-                        .WithMany()
+                    b.HasOne("MovieTicketBooking.Models.Booking", "Booking")
+                        .WithMany("BookingSeats")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MovieTicketBooking.Models.Seat", null)
-                        .WithMany()
+                    b.HasOne("MovieTicketBooking.Models.Seat", "Seat")
+                        .WithMany("BookingSeats")
                         .HasForeignKey("SeatId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Booking");
+
+                    b.Navigation("Seat");
                 });
 
             modelBuilder.Entity("MovieTicketBooking.Models.Screen", b =>
                 {
-                    b.HasOne("MovieTicketBooking.Models.Theatre", null)
-                        .WithMany()
+                    b.HasOne("MovieTicketBooking.Models.Theatre", "Theatre")
+                        .WithMany("Screens")
                         .HasForeignKey("TheatreId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Theatre");
                 });
 
             modelBuilder.Entity("MovieTicketBooking.Models.Seat", b =>
                 {
-                    b.HasOne("MovieTicketBooking.Models.Screen", null)
-                        .WithMany()
+                    b.HasOne("MovieTicketBooking.Models.Screen", "Screen")
+                        .WithMany("Seats")
                         .HasForeignKey("ScreenId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Screen");
                 });
 
             modelBuilder.Entity("MovieTicketBooking.Models.Show", b =>
                 {
-                    b.HasOne("MovieTicketBooking.Models.Movie", null)
-                        .WithMany()
+                    b.HasOne("MovieTicketBooking.Models.Movie", "Movie")
+                        .WithMany("Shows")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("MovieTicketBooking.Models.Screen", "Screen")
+                        .WithMany("Shows")
+                        .HasForeignKey("ScreenId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("Screen");
                 });
 
             modelBuilder.Entity("MovieTicketBooking.Models.ShowSeat", b =>
                 {
-                    b.HasOne("MovieTicketBooking.Models.Seat", null)
-                        .WithMany()
+                    b.HasOne("MovieTicketBooking.Models.Seat", "Seat")
+                        .WithMany("ShowSeats")
                         .HasForeignKey("SeatId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MovieTicketBooking.Models.Show", null)
-                        .WithMany()
+                    b.HasOne("MovieTicketBooking.Models.Show", "Show")
+                        .WithMany("ShowSeats")
                         .HasForeignKey("ShowId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Seat");
+
+                    b.Navigation("Show");
+                });
+
+            modelBuilder.Entity("MovieTicketBooking.Models.Booking", b =>
+                {
+                    b.Navigation("BookingSeats");
+                });
+
+            modelBuilder.Entity("MovieTicketBooking.Models.Movie", b =>
+                {
+                    b.Navigation("Shows");
+                });
+
+            modelBuilder.Entity("MovieTicketBooking.Models.Screen", b =>
+                {
+                    b.Navigation("Seats");
+
+                    b.Navigation("Shows");
+                });
+
+            modelBuilder.Entity("MovieTicketBooking.Models.Seat", b =>
+                {
+                    b.Navigation("BookingSeats");
+
+                    b.Navigation("ShowSeats");
+                });
+
+            modelBuilder.Entity("MovieTicketBooking.Models.Show", b =>
+                {
+                    b.Navigation("Bookings");
+
+                    b.Navigation("ShowSeats");
+                });
+
+            modelBuilder.Entity("MovieTicketBooking.Models.Theatre", b =>
+                {
+                    b.Navigation("Screens");
+                });
+
+            modelBuilder.Entity("MovieTicketBooking.Models.User", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

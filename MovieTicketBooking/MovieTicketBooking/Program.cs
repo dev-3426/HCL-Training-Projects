@@ -1,11 +1,16 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MovieTicketBooking.Data;
 using MovieTicketBooking.Middleware;
+using MovieTicketBooking.Models;
 using MovieTicketBooking.Repositories;
 using MovieTicketBooking.Repositories.Interfaces;
 using MovieTicketBooking.Services;
 using MovieTicketBooking.Services.Interfaces;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +41,16 @@ builder.Services.AddScoped<IShowService, ShowService>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 
+// User Management
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+// Password hashing
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+// JWT service
+builder.Services.AddScoped<IJwtService, JwtService>();
+
 // Configure Entity Framework Core with SQL Server
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection");
@@ -49,6 +64,51 @@ if (string.IsNullOrWhiteSpace(connectionString))
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+// JWT Authentication
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+
+string jwtIssuer = jwtSettings["Issuer"]
+    ?? throw new InvalidOperationException("JWT Issuer is missing.");
+
+string jwtAudience = jwtSettings["Audience"]
+    ?? throw new InvalidOperationException("JWT Audience is missing.");
+
+string jwtKey = jwtSettings["Key"]
+    ?? throw new InvalidOperationException("JWT Key is missing.");
+
+if (Encoding.UTF8.GetByteCount(jwtKey) < 32)
+{
+    throw new InvalidOperationException(
+        "JWT Key must contain at least 32 bytes.");
+}
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters =
+            new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = jwtIssuer,
+
+                ValidateAudience = true,
+                ValidAudience = jwtAudience,
+
+                ValidateLifetime = true,
+
+                ValidateIssuerSigningKey = true,
+
+                IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(jwtKey)),
+
+                ClockSkew = TimeSpan.Zero
+            };
+    });
+
+// Authorization
+builder.Services.AddAuthorization();
+
 // Global Exception Handling
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
@@ -57,6 +117,14 @@ builder.Services.AddProblemDetails();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// Seed initial Admin account when credentials are configured
+if (app.Environment.IsDevelopment())
+{
+    await RoleSeeder.SeedAsync(
+        app.Services,
+        app.Configuration);
+}
 
 // Global exception handler
 app.UseExceptionHandler();
@@ -68,6 +136,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Authentication must come before Authorization
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Database Health Check
 app.MapGet("/api/health/database", async (ApplicationDbContext db) =>

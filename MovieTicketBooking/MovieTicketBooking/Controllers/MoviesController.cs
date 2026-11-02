@@ -1,5 +1,7 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieTicketBooking.Constants;
 using MovieTicketBooking.DTOs.Movies;
 using MovieTicketBooking.Services.Interfaces;
 
@@ -17,6 +19,7 @@ public class MoviesController : ControllerBase
     }
 
     // POST: api/movies
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpPost]
     public async Task<IActionResult> CreateMovie(
         CreateMovieRequest request)
@@ -30,13 +33,12 @@ public class MoviesController : ControllerBase
     }
 
     // GET: api/movies
-    [HttpGet]
-
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAllMovies(
-    [FromQuery] int pageNumber = 1,
-    [FromQuery] int pageSize = 10,
-    [FromQuery] string? title = null)
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] string? title = null)
     {
         if (pageNumber < 1 || pageSize < 1 || pageSize > 100)
         {
@@ -52,8 +54,8 @@ public class MoviesController : ControllerBase
         return Ok(movies);
     }
 
-
     // GET: api/movies/1
+    [AllowAnonymous]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetMovieById(int id)
     {
@@ -68,6 +70,7 @@ public class MoviesController : ControllerBase
     }
 
     // PUT: api/movies/1
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateMovie(
         int id,
@@ -84,6 +87,7 @@ public class MoviesController : ControllerBase
     }
 
     // DELETE: api/movies/1
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteMovie(int id)
     {
@@ -98,6 +102,7 @@ public class MoviesController : ControllerBase
     }
 
     // GET: api/movies/search?title=Leo
+    [AllowAnonymous]
     [HttpGet("search")]
     public async Task<IActionResult> SearchMovies(
         [FromQuery] string title)

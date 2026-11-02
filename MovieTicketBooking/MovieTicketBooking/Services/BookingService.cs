@@ -16,10 +16,16 @@ public class BookingService : IBookingService
         _bookingRepository = bookingRepository;
     }
 
-    // Create booking
+    // Customer: Create booking
     public async Task<BookingResponse> CreateAsync(
-        CreateBookingRequest request)
+        CreateBookingRequest request,
+        int userId)
     {
+        if (userId <= 0)
+        {
+            throw new ValidationException("Invalid user ID.");
+        }
+
         // Validate selected seats
         if (request.SeatIds == null || request.SeatIds.Count == 0)
         {
@@ -29,8 +35,7 @@ public class BookingService : IBookingService
 
         if (request.SeatIds.Any(id => id <= 0))
         {
-            throw new ValidationException(
-                "Invalid seat ID.");
+            throw new ValidationException("Invalid seat ID.");
         }
 
         if (request.SeatIds.Distinct().Count() != request.SeatIds.Count)
@@ -75,9 +80,14 @@ public class BookingService : IBookingService
                 Guid.NewGuid().ToString("N")[..12].ToUpper(),
 
             ShowId = request.ShowId,
+
+            // Link booking to authenticated customer
+            UserId = userId,
+
             CustomerName = request.CustomerName.Trim(),
             CustomerEmail = request.CustomerEmail.Trim(),
             CustomerPhone = request.CustomerPhone.Trim(),
+
             BookingDate = DateTime.UtcNow,
             TotalAmount = totalAmount,
             Status = "Confirmed",
@@ -97,7 +107,7 @@ public class BookingService : IBookingService
         return MapToResponse(createdBooking);
     }
 
-    // Get booking by ID
+    // Admin: Get booking by ID
     public async Task<BookingResponse?> GetByIdAsync(int bookingId)
     {
         var booking = await _bookingRepository
@@ -109,7 +119,26 @@ public class BookingService : IBookingService
         return MapToResponse(booking);
     }
 
-    // Get all bookings with optional filters
+    // Customer: Get booking by ID
+    public async Task<BookingResponse?> GetByIdForUserAsync(
+        int bookingId,
+        int userId)
+    {
+        if (bookingId <= 0 || userId <= 0)
+        {
+            throw new ValidationException("Invalid booking or user ID.");
+        }
+
+        var booking = await _bookingRepository
+            .GetByIdForUserAsync(bookingId, userId);
+
+        if (booking == null)
+            return null;
+
+        return MapToResponse(booking);
+    }
+
+    // Admin: Get all bookings with optional filters
     public async Task<List<BookingResponse>> GetAllAsync(
         int? showId,
         string? status)
@@ -128,7 +157,7 @@ public class BookingService : IBookingService
             .ToList();
     }
 
-    // Get bookings by show ID
+    // Admin: Get bookings by show ID
     public async Task<List<BookingResponse>> GetByShowIdAsync(
         int showId)
     {
@@ -146,7 +175,23 @@ public class BookingService : IBookingService
             .ToList();
     }
 
-    // Cancel booking
+    // Customer: Get their own bookings
+    public async Task<List<BookingResponse>> GetMyBookingsAsync(int userId)
+    {
+        if (userId <= 0)
+        {
+            throw new ValidationException("Invalid user ID.");
+        }
+
+        var bookings = await _bookingRepository
+            .GetByUserIdAsync(userId);
+
+        return bookings
+            .Select(MapToResponse)
+            .ToList();
+    }
+
+    // Admin: Cancel any booking
     public async Task<BookingResponse?> CancelAsync(int bookingId)
     {
         if (bookingId <= 0)
@@ -171,6 +216,41 @@ public class BookingService : IBookingService
 
         var cancelledBooking = await _bookingRepository
             .CancelAsync(bookingId);
+
+        if (cancelledBooking == null)
+        {
+            throw new NotFoundException("Booking not found.");
+        }
+
+        return MapToResponse(cancelledBooking);
+    }
+
+    // Customer: Cancel only their own booking
+    public async Task<BookingResponse?> CancelForUserAsync(
+        int bookingId,
+        int userId)
+    {
+        if (bookingId <= 0 || userId <= 0)
+        {
+            throw new ValidationException("Invalid booking or user ID.");
+        }
+
+        var existingBooking = await _bookingRepository
+            .GetByIdForUserAsync(bookingId, userId);
+
+        if (existingBooking == null)
+        {
+            throw new NotFoundException("Booking not found.");
+        }
+
+        if (existingBooking.Status != "Confirmed")
+        {
+            throw new ConflictException(
+                "Only confirmed bookings can be cancelled.");
+        }
+
+        var cancelledBooking = await _bookingRepository
+            .CancelForUserAsync(bookingId, userId);
 
         if (cancelledBooking == null)
         {

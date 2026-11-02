@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MovieTicketBooking.Constants;
 using MovieTicketBooking.DTOs.Bookings;
 using MovieTicketBooking.Services.Interfaces;
 
 namespace MovieTicketBooking.Controllers;
 
 [ApiController]
-[Route("api/bookings")]
+[Route("api/[controller]")]
 public class BookingsController : ControllerBase
 {
     private readonly IBookingService _bookingService;
@@ -15,13 +19,32 @@ public class BookingsController : ControllerBase
         _bookingService = bookingService;
     }
 
-    // POST: api/bookings
-    // Create booking
-    [HttpPost]
-    public async Task<IActionResult> Create(
-        [FromBody] CreateBookingRequest request)
+    // Get logged-in user's ID from JWT claims
+    private int GetCurrentUserId()
     {
-        var booking = await _bookingService.CreateAsync(request);
+        var userIdValue = User.FindFirstValue(
+            ClaimTypes.NameIdentifier);
+
+        if (!int.TryParse(userIdValue, out int userId))
+        {
+            throw new UnauthorizedAccessException(
+                "Invalid user authentication.");
+        }
+
+        return userId;
+    }
+
+    // Customer: Create booking
+    [HttpPost]
+    [Authorize(Roles = UserRoles.Customer)]
+    public async Task<ActionResult<BookingResponse>> Create(
+        CreateBookingRequest request)
+    {
+        int userId = GetCurrentUserId();
+
+        var booking = await _bookingService.CreateAsync(
+            request,
+            userId);
 
         return CreatedAtAction(
             nameof(GetById),
@@ -29,62 +52,95 @@ public class BookingsController : ControllerBase
             booking);
     }
 
-    // GET: api/bookings
-    // Get all bookings with optional filters
+    // Admin: Get all bookings
     [HttpGet]
-    public async Task<IActionResult> GetAll(
+    [Authorize(Roles = UserRoles.Admin)]
+    public async Task<ActionResult<List<BookingResponse>>> GetAll(
         [FromQuery] int? showId,
         [FromQuery] string? status)
     {
-        var bookings = await _bookingService
-            .GetAllAsync(showId, status);
+        var bookings = await _bookingService.GetAllAsync(
+            showId,
+            status);
 
         return Ok(bookings);
     }
 
-    // GET: api/bookings/{id}
-    // Get booking by ID
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    // Customer: Get own booking history
+    [HttpGet("my-bookings")]
+    [Authorize(Roles = UserRoles.Customer)]
+    public async Task<ActionResult<List<BookingResponse>>> GetMyBookings()
     {
-        var booking = await _bookingService.GetByIdAsync(id);
+        int userId = GetCurrentUserId();
 
-        if (booking == null)
+        var bookings = await _bookingService.GetMyBookingsAsync(userId);
+
+        return Ok(bookings);
+    }
+
+    // Admin: Get bookings by show
+    [HttpGet("show/{showId:int}")]
+    [Authorize(Roles = UserRoles.Admin)]
+    public async Task<ActionResult<List<BookingResponse>>> GetByShowId(
+        int showId)
+    {
+        var bookings = await _bookingService.GetByShowIdAsync(showId);
+
+        return Ok(bookings);
+    }
+
+    // Admin or owning customer: Get booking by ID
+    [HttpGet("{id:int}")]
+    [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Customer)]
+    public async Task<ActionResult<BookingResponse>> GetById(int id)
+    {
+        if (User.IsInRole(UserRoles.Admin))
         {
-            return NotFound(new
-            {
-                message = "Booking not found."
-            });
+            var adminBooking = await _bookingService.GetByIdAsync(id);
+
+            if (adminBooking == null)
+                return NotFound(new { message = "Booking not found." });
+
+            return Ok(adminBooking);
         }
 
-        return Ok(booking);
+        int userId = GetCurrentUserId();
+
+        var customerBooking = await _bookingService
+            .GetByIdForUserAsync(id, userId);
+
+        if (customerBooking == null)
+            return NotFound(new { message = "Booking not found." });
+
+        return Ok(customerBooking);
     }
 
-    // GET: api/bookings/show/{showId}
-    // Get bookings for a particular show
-    [HttpGet("show/{showId}")]
-    public async Task<IActionResult> GetByShowId(int showId)
-    {
-        var bookings = await _bookingService
-            .GetByShowIdAsync(showId);
-
-        return Ok(bookings);
-    }
-
-    // PUT: api/bookings/{id}/cancel
-    // Cancel booking
-    [HttpPut("{id}/cancel")]
-    public async Task<IActionResult> Cancel(int id)
+    // Admin: Cancel any booking
+    [HttpPut("{id:int}/cancel")]
+    [Authorize(Roles = UserRoles.Admin)]
+    public async Task<ActionResult<BookingResponse>> Cancel(int id)
     {
         var booking = await _bookingService.CancelAsync(id);
 
         if (booking == null)
-        {
-            return NotFound(new
-            {
-                message = "Booking not found."
-            });
-        }
+            return NotFound(new { message = "Booking not found." });
+
+        return Ok(booking);
+    }
+
+    // Customer: Cancel own booking
+    [HttpPut("{id:int}/cancel-my-booking")]
+    [Authorize(Roles = UserRoles.Customer)]
+    public async Task<ActionResult<BookingResponse>> CancelMyBooking(int id)
+    {
+        int userId = GetCurrentUserId();
+
+        var booking = await _bookingService.CancelForUserAsync(
+            id,
+            userId);
+
+        if (booking == null)
+            return NotFound(new { message = "Booking not found." });
 
         return Ok(booking);
     }

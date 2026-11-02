@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MovieTicketBooking.Constants;
 using MovieTicketBooking.DTOs.Seats;
 using MovieTicketBooking.Services.Interfaces;
 
@@ -16,6 +19,7 @@ public class SeatsController : ControllerBase
     }
 
     // POST: api/seats
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpPost]
     public async Task<IActionResult> CreateSeat(
         CreateSeatRequest request)
@@ -29,6 +33,7 @@ public class SeatsController : ControllerBase
     }
 
     // POST: api/seats/bulk
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpPost("bulk")]
     public async Task<IActionResult> CreateBulkSeats(
         BulkCreateSeatsRequest request)
@@ -39,6 +44,7 @@ public class SeatsController : ControllerBase
     }
 
     // GET: api/seats/screen/1
+    [AllowAnonymous]
     [HttpGet("screen/{screenId:int}")]
     public async Task<IActionResult> GetSeatsByScreen(int screenId)
     {
@@ -48,6 +54,7 @@ public class SeatsController : ControllerBase
     }
 
     // GET: api/seats/5
+    [AllowAnonymous]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetSeatById(int id)
     {
@@ -60,6 +67,7 @@ public class SeatsController : ControllerBase
     }
 
     // PUT: api/seats/5
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateSeat(
         int id,
@@ -74,6 +82,7 @@ public class SeatsController : ControllerBase
     }
 
     // DELETE: api/seats/5
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteSeat(int id)
     {

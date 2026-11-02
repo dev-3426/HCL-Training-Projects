@@ -9,6 +9,10 @@ public class Booking
 
     public int ShowId { get; set; }
 
+    // Link the booking to the logged-in customer.
+    // Nullable to preserve existing bookings.
+    public int? UserId { get; set; }
+
     public string CustomerName { get; set; } = string.Empty;
 
     public string CustomerEmail { get; set; } = string.Empty;
@@ -23,5 +27,8 @@ public class Booking
 
     public Show Show { get; set; } = null!;
 
-    public ICollection<BookingSeat> BookingSeats { get; set; } = new List<BookingSeat>();
+    public User? User { get; set; }
+
+    public ICollection<BookingSeat> BookingSeats { get; set; } =
+        new List<BookingSeat>();
 }

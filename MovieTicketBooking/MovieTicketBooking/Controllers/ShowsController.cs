@@ -1,5 +1,7 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieTicketBooking.Constants;
 using MovieTicketBooking.DTOs.Shows;
 using MovieTicketBooking.Services.Interfaces;
 
@@ -17,6 +19,7 @@ public class ShowsController : ControllerBase
     }
 
     // POST: api/shows
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpPost]
     public async Task<IActionResult> Create(
         [FromBody] CreateShowRequest request)
@@ -30,6 +33,7 @@ public class ShowsController : ControllerBase
     }
 
     // GET: api/shows
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAll(
         [FromQuery] DateTime? date,
@@ -45,6 +49,7 @@ public class ShowsController : ControllerBase
     }
 
     // GET: api/shows/1
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -57,6 +62,7 @@ public class ShowsController : ControllerBase
     }
 
     // GET: api/shows/1/seats
+    [AllowAnonymous]
     [HttpGet("{showId}/seats")]
     public async Task<IActionResult> GetShowSeats(int showId)
     {
@@ -66,6 +72,7 @@ public class ShowsController : ControllerBase
     }
 
     // GET: api/shows/1/seats/available
+    [AllowAnonymous]
     [HttpGet("{showId}/seats/available")]
     public async Task<IActionResult> GetAvailableSeats(int showId)
     {
@@ -75,6 +82,7 @@ public class ShowsController : ControllerBase
     }
 
     // GET: api/shows/1/seats/booked
+    [AllowAnonymous]
     [HttpGet("{showId}/seats/booked")]
     public async Task<IActionResult> GetBookedSeats(int showId)
     {
@@ -84,6 +92,7 @@ public class ShowsController : ControllerBase
     }
 
     // DELETE: api/shows/1
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -96,6 +105,7 @@ public class ShowsController : ControllerBase
     }
 
     // GET: api/shows/movie/1
+    [AllowAnonymous]
     [HttpGet("movie/{movieId}")]
     public async Task<IActionResult> GetByMovieId(int movieId)
     {
@@ -105,6 +115,7 @@ public class ShowsController : ControllerBase
     }
 
     // GET: api/shows/theatre/1
+    [AllowAnonymous]
     [HttpGet("theatre/{theatreId}")]
     public async Task<IActionResult> GetByTheatreId(int theatreId)
     {
@@ -114,6 +125,7 @@ public class ShowsController : ControllerBase
     }
 
     // GET: api/shows/search?date=2026-11-01
+    [AllowAnonymous]
     [HttpGet("search")]
     public async Task<IActionResult> SearchByDate(
         [FromQuery] DateTime date)
@@ -124,6 +136,7 @@ public class ShowsController : ControllerBase
     }
 
     // PUT: api/shows/1
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(
         int id,
