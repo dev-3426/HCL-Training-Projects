@@ -1,5 +1,4 @@
-﻿
-using MovieTicketBooking.Models;
+﻿using MovieTicketBooking.Models;
 
 namespace MovieTicketBooking.Repositories.Interfaces;
 
@@ -16,4 +15,12 @@ public interface IBookingRepository
         List<ShowSeat> showSeats);
 
     Task<Booking?> GetByIdAsync(int bookingId);
+
+    Task<List<Booking>> GetAllAsync(
+        int? showId,
+        string? status);
+
+    Task<List<Booking>> GetByShowIdAsync(int showId);
+
+    Task<Booking?> CancelAsync(int bookingId);
 }
