@@ -1,0 +1,21 @@
+
+# Build output
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+
+# IDE files
+.vscode/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+
+
+node_modules/

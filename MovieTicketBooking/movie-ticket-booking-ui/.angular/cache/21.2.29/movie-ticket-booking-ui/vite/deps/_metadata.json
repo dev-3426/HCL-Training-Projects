@@ -1,0 +1,70 @@
+{
+  "hash": "7f69e39a",
+  "configHash": "9797b9ce",
+  "lockfileHash": "17a11aa3",
+  "browserHash": "8f230aaf",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "64691aac",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "8b192097",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "d189e9d6",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "e39e727f",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "760e39a8",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "cd08c902",
+      "needsInterop": false
+    },
+    "rxjs": {
+      "src": "../../../../../../node_modules/rxjs/dist/esm5/index.js",
+      "file": "rxjs.js",
+      "fileHash": "a3bbe3f4",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-3BFQFR6D": {
+      "file": "chunk-3BFQFR6D.js"
+    },
+    "chunk-OD45NR6C": {
+      "file": "chunk-OD45NR6C.js"
+    },
+    "chunk-DGNH45SC": {
+      "file": "chunk-DGNH45SC.js"
+    },
+    "chunk-QBNRTG4E": {
+      "file": "chunk-QBNRTG4E.js"
+    },
+    "chunk-OUKMFLVI": {
+      "file": "chunk-OUKMFLVI.js"
+    },
+    "chunk-GUMF56IT": {
+      "file": "chunk-GUMF56IT.js"
+    }
+  }
+}
