@@ -6,6 +6,7 @@ using MovieTicketBooking.Constants;
 using MovieTicketBooking.DTOs.Bookings;
 using MovieTicketBooking.Services.Interfaces;
 
+
 namespace MovieTicketBooking.Controllers;
 
 [ApiController]
@@ -13,10 +14,14 @@ namespace MovieTicketBooking.Controllers;
 public class BookingsController : ControllerBase
 {
     private readonly IBookingService _bookingService;
+    private readonly IAuthorizationService _authorizationService;
 
-    public BookingsController(IBookingService bookingService)
+    public BookingsController(
+     IBookingService bookingService,
+     IAuthorizationService authorizationService)
     {
         _bookingService = bookingService;
+        _authorizationService = authorizationService;
     }
 
     // Get logged-in user's ID from JWT claims
@@ -128,20 +133,31 @@ public class BookingsController : ControllerBase
         return Ok(booking);
     }
 
-    // Customer: Cancel own booking
+
+    // Customer: Cancel own booking using custom authorization
     [HttpPut("{id:int}/cancel-my-booking")]
     [Authorize(Roles = UserRoles.Customer)]
     public async Task<ActionResult<BookingResponse>> CancelMyBooking(int id)
     {
         int userId = GetCurrentUserId();
 
+        // Check whether the logged-in customer owns this booking
+        var authorizationResult = await _authorizationService.AuthorizeAsync(
+            User,
+            id,
+            "BookingOwner");
+
+        if (!authorizationResult.Succeeded)
+        {
+            return Forbid();
+        }
+
+        // Proceed with cancellation after authorization succeeds
         var booking = await _bookingService.CancelForUserAsync(
             id,
             userId);
 
-        if (booking == null)
-            return NotFound(new { message = "Booking not found." });
-
         return Ok(booking);
     }
+
 }

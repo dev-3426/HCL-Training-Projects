@@ -1,8 +1,12 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+
+using MovieTicketBooking.Authorization.Requirements;
+using MovieTicketBooking.Authorization.Handlers;
 using MovieTicketBooking.Data;
 using MovieTicketBooking.Middleware;
 using MovieTicketBooking.Models;
@@ -10,6 +14,7 @@ using MovieTicketBooking.Repositories;
 using MovieTicketBooking.Repositories.Interfaces;
 using MovieTicketBooking.Services;
 using MovieTicketBooking.Services.Interfaces;
+
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -106,8 +111,18 @@ builder.Services
             };
     });
 
-// Authorization
-builder.Services.AddAuthorization();
+// Custom Authorization Policy
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("BookingOwner", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.AddRequirements(new BookingOwnerRequirement());
+    });
+});
+
+// Register Custom Authorization Handler
+builder.Services.AddScoped<IAuthorizationHandler, BookingOwnerHandler>();
 
 // Global Exception Handling
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -116,6 +131,7 @@ builder.Services.AddProblemDetails();
 // OpenAPI
 builder.Services.AddOpenApi();
 
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AngularPolicy", policy =>
@@ -126,10 +142,46 @@ builder.Services.AddCors(options =>
     });
 });
 
-
 var app = builder.Build();
 
-// Seed initial Admin account when credentials are configured
+// ========================================
+// HTTP REQUEST PIPELINE
+// ========================================
+
+// 1. HTTPS Redirection
+app.UseHttpsRedirection();
+
+// 2. Global Exception Handling
+app.UseExceptionHandler();
+
+// 3. CORS
+app.UseCors("AngularPolicy");
+
+// 4. Endpoint Metadata Diagnostics
+if (app.Environment.IsDevelopment())
+{
+    app.UseMiddleware<EndpointMetadataMiddleware>();
+}
+
+// 5. Authentication
+app.UseAuthentication();
+
+// 6. Authentication Diagnostics
+if (app.Environment.IsDevelopment())
+{
+    app.UseMiddleware<AuthenticationDiagnosticsMiddleware>();
+
+    app.UseMiddleware<AuthorizationDiagnosticsMiddleware>();
+}
+
+// 7. Authorization
+app.UseAuthorization();
+
+// ========================================
+// DEVELOPMENT CONFIGURATION
+// ========================================
+
+// Seed initial Admin account
 if (app.Environment.IsDevelopment())
 {
     await RoleSeeder.SeedAsync(
@@ -137,25 +189,16 @@ if (app.Environment.IsDevelopment())
         app.Configuration);
 }
 
-// Global exception handler
-app.UseExceptionHandler();
-
-// Configure HTTP request pipeline
+// OpenAPI
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+// ========================================
+// DATABASE HEALTH CHECK
+// ========================================
 
-// Authentication must come before Authorization
-app.UseCors("AngularPolicy");
-
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-// Database Health Check
 app.MapGet("/api/health/database", async (ApplicationDbContext db) =>
 {
     bool canConnect = await db.Database.CanConnectAsync();
@@ -175,6 +218,7 @@ app.MapGet("/api/health/database", async (ApplicationDbContext db) =>
     );
 });
 
+// Map Controllers
 app.MapControllers();
 
 app.Run();
