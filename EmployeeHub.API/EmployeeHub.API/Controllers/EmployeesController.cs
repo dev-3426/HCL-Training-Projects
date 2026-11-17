@@ -134,6 +134,40 @@ namespace EmployeeHub.API.Controllers
         }
 
 
+        // GET: api/employees/paged?pageNumber=1&pageSize=10
+        [HttpGet("paged")]
+        public async Task<IActionResult> GetEmployeesPaged(
+            int pageNumber = 1,
+            int pageSize = 10)
+        {
+            if (pageNumber < 1 || pageSize < 1 || pageSize > 100)
+            {
+                return BadRequest("Invalid page number or page size. Page size must be between 1 and 100.");
+            }
+
+            var totalRecords = await _context.Employees.CountAsync();
+
+            var employees = await _context.Employees
+                .OrderBy(e => e.Id)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var totalPages = (int)Math.Ceiling(
+                totalRecords / (double)pageSize);
+
+            return Ok(new
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalRecords = totalRecords,
+                TotalPages = totalPages,
+                Employees = employees
+            });
+        }
+
+
+
 
 
 
