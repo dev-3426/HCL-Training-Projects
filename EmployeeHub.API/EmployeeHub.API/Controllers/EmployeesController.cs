@@ -25,5 +25,22 @@ namespace EmployeeHub.API.Controllers
 
             return Ok(employees);
         }
+
+
+        // GET: api/employees/1
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Employee>> GetEmployeeById(int id)
+        {
+            var employee = await _context.Employees
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(employee);
+        }
+
     }
 }
