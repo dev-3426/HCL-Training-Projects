@@ -90,5 +90,27 @@ namespace EmployeeHub.API.Controllers
 
 
 
+        // DELETE: api/employees/1
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEmployee(int id)
+        {
+            var employee = await _context.Employees
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            _context.Employees.Remove(employee);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
+
+
     }
 }
