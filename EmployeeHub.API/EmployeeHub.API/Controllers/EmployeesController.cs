@@ -88,8 +88,6 @@ namespace EmployeeHub.API.Controllers
             return NoContent();
         }
 
-
-
         // DELETE: api/employees/1
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)
@@ -108,6 +106,33 @@ namespace EmployeeHub.API.Controllers
 
             return NoContent();
         }
+
+
+        // GET: api/employees/search?name=arun&isActive=true
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Employee>>> SearchEmployees(
+            string? name,
+            bool? isActive)
+        {
+            var query = _context.Employees.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                query = query.Where(e =>
+                    e.FirstName.Contains(name) ||
+                    e.LastName.Contains(name));
+            }
+
+            if (isActive.HasValue)
+            {
+                query = query.Where(e => e.IsActive == isActive.Value);
+            }
+
+            var employees = await query.ToListAsync();
+
+            return Ok(employees);
+        }
+
 
 
 
