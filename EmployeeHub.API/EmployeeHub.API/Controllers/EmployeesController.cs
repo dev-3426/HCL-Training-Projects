@@ -58,5 +58,37 @@ namespace EmployeeHub.API.Controllers
         }
 
 
+        // PUT: api/employees/1
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateEmployee(int id, Employee employee)
+        {
+            if (id != employee.Id)
+            {
+                return BadRequest("Employee ID mismatch.");
+            }
+
+            var existingEmployee = await _context.Employees
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (existingEmployee == null)
+            {
+                return NotFound();
+            }
+
+            existingEmployee.FirstName = employee.FirstName;
+            existingEmployee.LastName = employee.LastName;
+            existingEmployee.Email = employee.Email;
+            existingEmployee.PhoneNumber = employee.PhoneNumber;
+            existingEmployee.Salary = employee.Salary;
+            existingEmployee.DateOfJoining = employee.DateOfJoining;
+            existingEmployee.IsActive = employee.IsActive;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
+
     }
 }
