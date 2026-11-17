@@ -42,5 +42,21 @@ namespace EmployeeHub.API.Controllers
             return Ok(employee);
         }
 
+
+        // POST: api/employees
+        [HttpPost]
+        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+        {
+            _context.Employees.Add(employee);
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(
+                nameof(GetEmployeeById),
+                new { id = employee.Id },
+                employee);
+        }
+
+
     }
 }
