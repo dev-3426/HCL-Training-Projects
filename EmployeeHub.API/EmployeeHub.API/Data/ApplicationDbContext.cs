@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using EmployeeHub.API.Models;
 
 namespace EmployeeHub.API.Data
 {
@@ -9,5 +10,7 @@ namespace EmployeeHub.API.Data
             : base(options)
         {
         }
+
+        public DbSet<Employee> Employees { get; set; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 namespace EmployeeHub.API.Models
 {
     public class Employee
@@ -13,6 +15,7 @@ namespace EmployeeHub.API.Models
 
         public string PhoneNumber { get; set; } = string.Empty;
 
+        [Precision(18, 2)]
         public decimal Salary { get; set; }
 
         public DateTime DateOfJoining { get; set; }
