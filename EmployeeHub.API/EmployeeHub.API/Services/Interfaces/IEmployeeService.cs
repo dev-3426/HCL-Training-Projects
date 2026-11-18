@@ -1,21 +1,21 @@
 ﻿
-using EmployeeHub.API.Models;
+using EmployeeHub.API.DTOs;
 
 namespace EmployeeHub.API.Services.Interfaces
 {
     public interface IEmployeeService
     {
-        Task<List<Employee>> GetAllEmployeesAsync();
+        Task<List<EmployeeResponseDto>> GetAllEmployeesAsync();
 
-        Task<Employee?> GetEmployeeByIdAsync(int id);
+        Task<EmployeeResponseDto?> GetEmployeeByIdAsync(int id);
 
-        Task<Employee> CreateEmployeeAsync(Employee employee);
+        Task<EmployeeResponseDto> CreateEmployeeAsync(CreateEmployeeDto dto);
 
-        Task<bool> UpdateEmployeeAsync(int id, Employee employee);
+        Task<bool> UpdateEmployeeAsync(int id, UpdateEmployeeDto dto);
 
         Task<bool> DeleteEmployeeAsync(int id);
 
-        Task<List<Employee>> SearchEmployeesAsync(
+        Task<List<EmployeeResponseDto>> SearchEmployeesAsync(
             string? name, bool? isActive);
 
         Task<object> GetEmployeesPagedAsync(

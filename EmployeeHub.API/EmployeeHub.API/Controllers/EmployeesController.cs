@@ -1,4 +1,5 @@
 ﻿
+using EmployeeHub.API.DTOs;
 using EmployeeHub.API.Models;
 using EmployeeHub.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace EmployeeHub.API.Controllers
 
         // GET: api/employees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<EmployeeResponseDto>>> GetEmployees()
         {
             var employees = await _employeeService.GetAllEmployeesAsync();
 
@@ -27,7 +28,7 @@ namespace EmployeeHub.API.Controllers
 
         // GET: api/employees/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployeeById(int id)
+        public async Task<ActionResult<EmployeeResponseDto>> GetEmployeeById(int id)
         {
             var employee = await _employeeService.GetEmployeeByIdAsync(id);
 
@@ -41,9 +42,10 @@ namespace EmployeeHub.API.Controllers
 
         // POST: api/employees
         [HttpPost]
-        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+        public async Task<ActionResult<EmployeeResponseDto>> CreateEmployee(
+            CreateEmployeeDto dto)
         {
-            var createdEmployee = await _employeeService.CreateEmployeeAsync(employee);
+            var createdEmployee = await _employeeService.CreateEmployeeAsync(dto);
 
             return CreatedAtAction(
                 nameof(GetEmployeeById),
@@ -53,14 +55,10 @@ namespace EmployeeHub.API.Controllers
 
         // PUT: api/employees/1
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEmployee(int id, Employee employee)
+        public async Task<IActionResult> UpdateEmployee(
+            int id, UpdateEmployeeDto dto)
         {
-            if (id != employee.Id)
-            {
-                return BadRequest("Employee ID mismatch.");
-            }
-
-            var updated = await _employeeService.UpdateEmployeeAsync(id, employee);
+            var updated = await _employeeService.UpdateEmployeeAsync(id, dto);
 
             if (!updated)
             {
@@ -84,12 +82,10 @@ namespace EmployeeHub.API.Controllers
             return NoContent();
         }
 
-
-        // GET: api/employees/search?name=arun&isActive=true
+        // GET: api/employees/search
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Employee>>> SearchEmployees(
-            string? name,
-            bool? isActive)
+        public async Task<ActionResult<IEnumerable<EmployeeResponseDto>>> SearchEmployees(
+            string? name, bool? isActive)
         {
             var employees = await _employeeService.SearchEmployeesAsync(
                 name, isActive);
@@ -97,17 +93,14 @@ namespace EmployeeHub.API.Controllers
             return Ok(employees);
         }
 
-
-        // GET: api/employees/paged?pageNumber=1&pageSize=10
+        // GET: api/employees/paged
         [HttpGet("paged")]
         public async Task<IActionResult> GetEmployeesPaged(
-            int pageNumber = 1,
-            int pageSize = 10)
+            int pageNumber = 1, int pageSize = 10)
         {
             if (pageNumber < 1 || pageSize < 1 || pageSize > 100)
             {
-                return BadRequest(
-                    "Invalid page number or page size. Page size must be between 1 and 100.");
+                return BadRequest("Invalid page number or page size.");
             }
 
             var result = await _employeeService.GetEmployeesPagedAsync(
@@ -115,7 +108,5 @@ namespace EmployeeHub.API.Controllers
 
             return Ok(result);
         }
-
-
     }
 }

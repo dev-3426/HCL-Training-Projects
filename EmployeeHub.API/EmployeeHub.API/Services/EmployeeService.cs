@@ -1,5 +1,7 @@
 ﻿
 using EmployeeHub.API.Data;
+using EmployeeHub.API.DTOs;
+using EmployeeHub.API.DTOs.Mappings;
 using EmployeeHub.API.Models;
 using EmployeeHub.API.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -16,46 +18,55 @@ namespace EmployeeHub.API.Services
         }
 
         // Get all employees
-        public async Task<List<Employee>> GetAllEmployeesAsync()
+        public async Task<List<EmployeeResponseDto>> GetAllEmployeesAsync()
         {
-            return await _context.Employees.ToListAsync();
+            var employees = await _context.Employees.ToListAsync();
+
+            return employees
+                .Select(EmployeeMapper.ToResponseDto)
+                .ToList();
         }
 
         // Get employee by ID
-        public async Task<Employee?> GetEmployeeByIdAsync(int id)
+        public async Task<EmployeeResponseDto?> GetEmployeeByIdAsync(int id)
         {
-            return await _context.Employees
+            var employee = await _context.Employees
                 .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (employee == null)
+            {
+                return null;
+            }
+
+            return EmployeeMapper.ToResponseDto(employee);
         }
 
         // Create employee
-        public async Task<Employee> CreateEmployeeAsync(Employee employee)
+        public async Task<EmployeeResponseDto> CreateEmployeeAsync(
+            CreateEmployeeDto dto)
         {
+            var employee = EmployeeMapper.ToEmployee(dto);
+
             _context.Employees.Add(employee);
 
             await _context.SaveChangesAsync();
 
-            return employee;
+            return EmployeeMapper.ToResponseDto(employee);
         }
 
         // Update employee
-        public async Task<bool> UpdateEmployeeAsync(int id, Employee employee)
+        public async Task<bool> UpdateEmployeeAsync(
+            int id, UpdateEmployeeDto dto)
         {
-            var existingEmployee = await _context.Employees
+            var employee = await _context.Employees
                 .FirstOrDefaultAsync(e => e.Id == id);
 
-            if (existingEmployee == null)
+            if (employee == null)
             {
                 return false;
             }
 
-            existingEmployee.FirstName = employee.FirstName;
-            existingEmployee.LastName = employee.LastName;
-            existingEmployee.Email = employee.Email;
-            existingEmployee.PhoneNumber = employee.PhoneNumber;
-            existingEmployee.Salary = employee.Salary;
-            existingEmployee.DateOfJoining = employee.DateOfJoining;
-            existingEmployee.IsActive = employee.IsActive;
+            EmployeeMapper.UpdateEmployeeFromDto(employee, dto);
 
             await _context.SaveChangesAsync();
 
@@ -80,12 +91,9 @@ namespace EmployeeHub.API.Services
             return true;
         }
 
-
-
         // Search and filter employees
-        public async Task<List<Employee>> SearchEmployeesAsync(
-            string? name,
-            bool? isActive)
+        public async Task<List<EmployeeResponseDto>> SearchEmployeesAsync(
+            string? name, bool? isActive)
         {
             var query = _context.Employees.AsQueryable();
 
@@ -101,13 +109,16 @@ namespace EmployeeHub.API.Services
                 query = query.Where(e => e.IsActive == isActive.Value);
             }
 
-            return await query.ToListAsync();
+            var employees = await query.ToListAsync();
+
+            return employees
+                .Select(EmployeeMapper.ToResponseDto)
+                .ToList();
         }
 
-        // Get employees with pagination
+        // Pagination
         public async Task<object> GetEmployeesPagedAsync(
-            int pageNumber,
-            int pageSize)
+            int pageNumber, int pageSize)
         {
             var totalRecords = await _context.Employees.CountAsync();
 
@@ -127,8 +138,9 @@ namespace EmployeeHub.API.Services
                 TotalRecords = totalRecords,
                 TotalPages = totalPages,
                 Employees = employees
+                    .Select(EmployeeMapper.ToResponseDto)
+                    .ToList()
             };
         }
-
     }
 }
