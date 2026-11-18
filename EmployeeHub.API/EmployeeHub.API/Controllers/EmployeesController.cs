@@ -1,8 +1,7 @@
 ﻿
-using EmployeeHub.API.Data;
 using EmployeeHub.API.Models;
+using EmployeeHub.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeHub.API.Controllers
 {
@@ -10,29 +9,27 @@ namespace EmployeeHub.API.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IEmployeeService _employeeService;
 
-        public EmployeesController(ApplicationDbContext context)
+        public EmployeesController(IEmployeeService employeeService)
         {
-            _context = context;
+            _employeeService = employeeService;
         }
 
         // GET: api/employees
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
-            var employees = await _context.Employees.ToListAsync();
+            var employees = await _employeeService.GetAllEmployeesAsync();
 
             return Ok(employees);
         }
-
 
         // GET: api/employees/1
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployeeById(int id)
         {
-            var employee = await _context.Employees
-                .FirstOrDefaultAsync(e => e.Id == id);
+            var employee = await _employeeService.GetEmployeeByIdAsync(id);
 
             if (employee == null)
             {
@@ -42,21 +39,17 @@ namespace EmployeeHub.API.Controllers
             return Ok(employee);
         }
 
-
         // POST: api/employees
         [HttpPost]
         public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
         {
-            _context.Employees.Add(employee);
-
-            await _context.SaveChangesAsync();
+            var createdEmployee = await _employeeService.CreateEmployeeAsync(employee);
 
             return CreatedAtAction(
                 nameof(GetEmployeeById),
-                new { id = employee.Id },
-                employee);
+                new { id = createdEmployee.Id },
+                createdEmployee);
         }
-
 
         // PUT: api/employees/1
         [HttpPut("{id}")]
@@ -67,23 +60,12 @@ namespace EmployeeHub.API.Controllers
                 return BadRequest("Employee ID mismatch.");
             }
 
-            var existingEmployee = await _context.Employees
-                .FirstOrDefaultAsync(e => e.Id == id);
+            var updated = await _employeeService.UpdateEmployeeAsync(id, employee);
 
-            if (existingEmployee == null)
+            if (!updated)
             {
                 return NotFound();
             }
-
-            existingEmployee.FirstName = employee.FirstName;
-            existingEmployee.LastName = employee.LastName;
-            existingEmployee.Email = employee.Email;
-            existingEmployee.PhoneNumber = employee.PhoneNumber;
-            existingEmployee.Salary = employee.Salary;
-            existingEmployee.DateOfJoining = employee.DateOfJoining;
-            existingEmployee.IsActive = employee.IsActive;
-
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -92,17 +74,12 @@ namespace EmployeeHub.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
-            var employee = await _context.Employees
-                .FirstOrDefaultAsync(e => e.Id == id);
+            var deleted = await _employeeService.DeleteEmployeeAsync(id);
 
-            if (employee == null)
+            if (!deleted)
             {
                 return NotFound();
             }
-
-            _context.Employees.Remove(employee);
-
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -114,21 +91,8 @@ namespace EmployeeHub.API.Controllers
             string? name,
             bool? isActive)
         {
-            var query = _context.Employees.AsQueryable();
-
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                query = query.Where(e =>
-                    e.FirstName.Contains(name) ||
-                    e.LastName.Contains(name));
-            }
-
-            if (isActive.HasValue)
-            {
-                query = query.Where(e => e.IsActive == isActive.Value);
-            }
-
-            var employees = await query.ToListAsync();
+            var employees = await _employeeService.SearchEmployeesAsync(
+                name, isActive);
 
             return Ok(employees);
         }
@@ -142,33 +106,15 @@ namespace EmployeeHub.API.Controllers
         {
             if (pageNumber < 1 || pageSize < 1 || pageSize > 100)
             {
-                return BadRequest("Invalid page number or page size. Page size must be between 1 and 100.");
+                return BadRequest(
+                    "Invalid page number or page size. Page size must be between 1 and 100.");
             }
 
-            var totalRecords = await _context.Employees.CountAsync();
+            var result = await _employeeService.GetEmployeesPagedAsync(
+                pageNumber, pageSize);
 
-            var employees = await _context.Employees
-                .OrderBy(e => e.Id)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            var totalPages = (int)Math.Ceiling(
-                totalRecords / (double)pageSize);
-
-            return Ok(new
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                TotalRecords = totalRecords,
-                TotalPages = totalPages,
-                Employees = employees
-            });
+            return Ok(result);
         }
-
-
-
-
 
 
     }
