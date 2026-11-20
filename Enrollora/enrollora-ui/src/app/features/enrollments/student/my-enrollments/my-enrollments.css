@@ -1,0 +1,405 @@
+.enrollment-page {
+  padding: 28px;
+  min-height: calc(100vh - 84px);
+  color: #29243b;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  color: #8b5cf6;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.page-header h1 {
+  font-size: 29px;
+  font-weight: 800;
+  margin: 7px 0;
+  color: #29213f;
+}
+
+.page-header p {
+  color: #898397;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ── State Cards ────────────────────────────────── */
+.state-card {
+  min-height: 280px;
+  background: #fff;
+  border: 1px solid #efedf4;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #898397;
+  text-align: center;
+  padding: 30px;
+}
+
+.state-card h3 { margin: 0; color: #443b55; }
+.state-card p  { margin: 0; font-size: 13px; }
+.empty-icon, .error-state > span { font-size: 36px; }
+.error-state { color: #c24141; }
+
+.retry-btn {
+  border: none;
+  border-radius: 9px;
+  padding: 9px 16px;
+  background: #8b5cf6;
+  color: #fff;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+/* ── Loader ─────────────────────────────────────── */
+.loader {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #eee8fa;
+  border-top-color: #8b5cf6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Table Card ─────────────────────────────────── */
+.table-card {
+  background: #fff;
+  border: 1px solid #efedf4;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(35, 25, 60, 0.035);
+  overflow: hidden;
+}
+
+.table-responsive { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+
+thead { background: #faf9fc; }
+
+th {
+  padding: 15px 20px;
+  text-align: left;
+  color: #9992a8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+}
+
+td {
+  padding: 17px 20px;
+  border-top: 1px solid #f2f0f5;
+  color: #625b70;
+  font-size: 13px;
+}
+
+/* ── Course Info ────────────────────────────────── */
+.course-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.course-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #eee5ff, #fce7f3);
+  color: #8753d9;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.course-info strong { display: block; color: #342c47; }
+.course-info small  { display: block; color: #a09aac; margin-top: 4px; }
+
+/* ── Status Badges ──────────────────────────────── */
+.status-badge {
+  display: inline-block;
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.status-badge.active    { background: #e9f8ef; color: #16834a; }
+.status-badge.cancelled { background: #fff0e9; color: #dc6541; }
+
+/* ── Cancel Button ──────────────────────────────── */
+.cancel-btn {
+  background: #fff2f2;
+  color: #d63031;
+  border: 1.5px solid #f7bebe;
+  border-radius: 9px;
+  padding: 7px 13px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, transform 0.12s;
+  white-space: nowrap;
+}
+
+.cancel-btn:hover {
+  background: #ffe0e0;
+  border-color: #e57373;
+  transform: translateY(-1px);
+}
+
+.no-action {
+  color: #ccc;
+  font-size: 16px;
+}
+
+/* ── Pagination ─────────────────────────────────── */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 20px;
+  border-top: 1px solid #f0edf5;
+  color: #625b70;
+  font-size: 13px;
+}
+
+.pagination div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.pagination button {
+  border: 1px solid #e9e5f0;
+  background: #fff;
+  color: #635a75;
+  padding: 8px 13px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.current-page {
+  background: #f3edff;
+  color: #8050d8;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* ── Modal Backdrop ─────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 10, 40, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.18s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-box {
+  background: #fff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 480px;
+  margin: 20px;
+  box-shadow: 0 20px 60px rgba(30, 10, 60, 0.18);
+  animation: slideUp 0.22s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── Modal Header ───────────────────────────────── */
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px 24px 0;
+}
+
+.modal-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #fff2f2;
+  color: #d63031;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.modal-header h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #2a1f3d;
+  margin: 0 0 4px;
+}
+
+.modal-header p {
+  font-size: 13px;
+  color: #8b82a0;
+  margin: 0;
+}
+
+.modal-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #9e96ae;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.modal-close:hover { color: #4a3f60; }
+
+/* ── Modal Body ─────────────────────────────────── */
+.modal-body {
+  padding: 20px 24px;
+}
+
+.field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4a3f60;
+  margin-bottom: 8px;
+}
+
+.required { color: #d63031; }
+
+.reason-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #e4dff0;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #2a1f3d;
+  background: #faf9fc;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color 0.18s;
+  font-family: inherit;
+}
+
+.reason-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  background: #fff;
+}
+
+.char-count {
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: #b0a8c0;
+  margin-top: 5px;
+}
+
+.alert-error {
+  margin-top: 12px;
+  background: #fff2f2;
+  color: #c0392b;
+  border: 1px solid #f7bebe;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+.alert-success {
+  background: #edfbf3;
+  color: #16834a;
+  border: 1px solid #a3e8c3;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ── Modal Footer ───────────────────────────────── */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 0 24px 24px;
+}
+
+.btn-secondary {
+  background: #f4f1fa;
+  color: #625b70;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-secondary:hover { background: #ebe6f5; }
+.btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-danger {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.15s, transform 0.12s;
+}
+
+.btn-danger:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.btn-danger:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 700px) {
+  .enrollment-page { padding: 16px; }
+  .pagination { align-items: flex-start; flex-direction: column; }
+}

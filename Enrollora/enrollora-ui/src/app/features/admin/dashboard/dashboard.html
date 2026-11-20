@@ -1,0 +1,156 @@
+
+<div class="dashboard">
+
+  <div class="dashboard-heading">
+    <div>
+      <h2>Dashboard Overview</h2>
+      <p>Here's what's happening across Enrollora today.</p>
+    </div>
+
+    <span class="dashboard-status">
+      <span class="status-dot"></span>
+      Live Overview
+    </span>
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-state">
+      <div class="spinner-border text-primary"></div>
+      <p>Loading dashboard...</p>
+    </div>
+  }
+  @else if (errorMessage) {
+    <div class="alert alert-danger">{{ errorMessage }}</div>
+  }
+  @else if (summary) {
+
+    <!-- Student Overview -->
+    <h5 class="section-title">Student Overview</h5>
+
+    <div class="row g-3 mb-4">
+
+      <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon blue">♙</div>
+          <p>Total Students</p>
+          <h3>{{ summary.totalStudents }}</h3>
+          <small>Registered students</small>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon orange">◷</div>
+          <p>Pending Approvals</p>
+          <h3>{{ summary.pendingApprovals }}</h3>
+          <small>Awaiting review</small>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon green">✓</div>
+          <p>Approved Students</p>
+          <h3>{{ summary.approvedStudents }}</h3>
+          <small>Approved accounts</small>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon red">✕</div>
+          <p>Rejected Students</p>
+          <h3>{{ summary.rejectedStudents }}</h3>
+          <small>Rejected applications</small>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Course Overview -->
+    <h5 class="section-title">Course Overview</h5>
+
+    <div class="row g-3 mb-4">
+
+      <div class="col-xl-4 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon purple">▤</div>
+          <p>Total Courses</p>
+          <h3>{{ summary.totalCourses }}</h3>
+          <small>Courses created</small>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon green">✓</div>
+          <p>Active Courses</p>
+          <h3>{{ summary.activeCourses }}</h3>
+          <small>Currently available</small>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon blue">▣</div>
+          <p>Available Seats</p>
+          <h3>{{ summary.totalAvailableSeats }}</h3>
+          <small>Seats remaining</small>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Enrollment Overview -->
+    <h5 class="section-title">Enrollment Overview</h5>
+
+    <div class="row g-3 mb-4">
+
+      <div class="col-xl-4 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon blue">↗</div>
+          <p>Active Enrollments</p>
+          <h3>{{ summary.activeEnrollments }}</h3>
+          <small>Current enrollments</small>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon red">↘</div>
+          <p>Cancelled Enrollments</p>
+          <h3>{{ summary.cancelledEnrollments }}</h3>
+          <small>Cancelled records</small>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon orange">◷</div>
+          <p>Pending Cancellation Requests</p>
+          <h3>{{ summary.pendingCancellationRequests }}</h3>
+          <small>Awaiting administrator action</small>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Academic Performance -->
+    <h5 class="section-title">Academic Performance</h5>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="cgpa-card">
+          <div>
+            <p>Average Student CGPA</p>
+            <h2>{{ summary.averageCgpa | number:'1.2-2' }}</h2>
+            <small>Overall academic performance</small>
+          </div>
+          <div class="cgpa-icon">★</div>
+        </div>
+      </div>
+    </div>
+
+  }
+
+</div>

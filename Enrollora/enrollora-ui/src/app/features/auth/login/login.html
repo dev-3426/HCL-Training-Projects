@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card shadow">
+        <div class="card-body p-4">
+          <h3 class="text-center mb-4">Enrollora Login</h3>
+
+          <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                [(ngModel)]="loginRequest.email"
+                required
+                email
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                [(ngModel)]="loginRequest.password"
+                required
+                placeholder="Enter your password"
+              />
+            </div>
+
+            @if (errorMessage) {
+              <div class="alert alert-danger">
+                {{ errorMessage }}
+              </div>
+            }
+
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="loginForm.invalid || isLoading"
+            >
+              @if (isLoading) {
+                Logging in...
+              } @else {
+                Login
+              }
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

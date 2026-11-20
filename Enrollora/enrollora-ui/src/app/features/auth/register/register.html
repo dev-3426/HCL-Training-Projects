@@ -1,0 +1,185 @@
+<div class="register-page">
+  <div class="register-card">
+    <!-- Header -->
+    <div class="text-center mb-3">
+      <h2 class="brand-name">Enrollora</h2>
+      <p class="text-muted mb-0">Create your student account</p>
+    </div>
+
+    <h5 class="form-heading">Student Registration</h5>
+
+    <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+      <div class="row">
+        <!-- Full Name -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Full Name</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="registerRequest.name"
+            required
+            placeholder="Enter your name"
+            #nameControl="ngModel"
+          />
+
+          @if (nameControl.invalid && (nameControl.touched || registerForm.submitted)) {
+            <small class="text-danger"> Full name is required. </small>
+          }
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Email</label>
+
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="registerRequest.email"
+            required
+            email
+            placeholder="Enter your email"
+            #emailControl="ngModel"
+          />
+
+          @if (emailControl.touched || registerForm.submitted) {
+            @if (emailControl.errors?.['required']) {
+              <small class="text-danger"> Email is required. </small>
+            } @else if (emailControl.errors?.['email']) {
+              <small class="text-danger"> Enter a valid email address. </small>
+            }
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Password</label>
+
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="registerRequest.password"
+            required
+            minlength="8"
+            placeholder="Enter password"
+            #passwordControl="ngModel"
+          />
+
+          @if (passwordControl.touched || registerForm.submitted) {
+            @if (passwordControl.errors?.['required']) {
+              <small class="text-danger"> Password is required. </small>
+            } @else if (passwordControl.errors?.['minlength']) {
+              <small class="text-danger"> Password must contain at least 8 characters. </small>
+            }
+          }
+        </div>
+
+        <!-- Department -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Department</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="department"
+            [(ngModel)]="registerRequest.department"
+            required
+            placeholder="Enter department"
+            #departmentControl="ngModel"
+          />
+
+          @if (departmentControl.invalid && (departmentControl.touched || registerForm.submitted)) {
+            <small class="text-danger"> Department is required. </small>
+          }
+        </div>
+
+        <!-- Age -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Age</label>
+
+          <input
+            type="number"
+            class="form-control"
+            name="age"
+            [(ngModel)]="registerRequest.age"
+            required
+            min="17"
+            max="60"
+            placeholder="Enter age"
+            #ageControl="ngModel"
+          />
+
+          @if (ageControl.touched || registerForm.submitted) {
+            @if (ageControl.errors?.['required']) {
+              <small class="text-danger"> Age is required. </small>
+            } @else if (ageControl.errors?.['min'] || ageControl.errors?.['max']) {
+              <small class="text-danger"> Age must be between 17 and 60. </small>
+            }
+          }
+        </div>
+
+        <!-- CGPA -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">CGPA</label>
+
+          <input
+            type="number"
+            class="form-control"
+            name="cgpa"
+            [(ngModel)]="registerRequest.cgpa"
+            required
+            min="0"
+            max="10"
+            step="0.01"
+            placeholder="Enter CGPA"
+            #cgpaControl="ngModel"
+          />
+
+          @if (cgpaControl.touched || registerForm.submitted) {
+            @if (cgpaControl.errors?.['required']) {
+              <small class="text-danger"> CGPA is required. </small>
+            } @else if (cgpaControl.errors?.['min'] || cgpaControl.errors?.['max']) {
+              <small class="text-danger"> CGPA must be between 0 and 10. </small>
+            }
+          }
+        </div>
+      </div>
+
+      <!-- Success Message -->
+      @if (successMessage) {
+        <div class="alert alert-success py-2">
+          {{ successMessage }}
+        </div>
+      }
+
+      <!-- Error Message -->
+      @if (errorMessage) {
+        <div class="alert alert-danger py-2">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-primary w-100 mt-2"
+        [disabled]="registerForm.invalid || isLoading"
+      >
+        @if (isLoading) {
+          Registering...
+        } @else {
+          Create Account
+        }
+      </button>
+    </form>
+
+    <!-- Login Link -->
+    <div class="login-link text-center mt-3">
+      Already have an account?
+      <a routerLink="/login">Login</a>
+    </div>
+  </div>
+</div>

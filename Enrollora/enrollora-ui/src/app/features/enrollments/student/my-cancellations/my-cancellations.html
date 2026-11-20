@@ -1,0 +1,87 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">MY REQUESTS</span>
+      <h1>Cancellation Requests</h1>
+      <p>Track the status of your submitted cancellation requests.</p>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="state-card">
+      <div class="loader"></div>
+      <p>Loading your requests...</p>
+    </div>
+  } @else if (errorMessage()) {
+    <div class="state-card error-state">
+      <span>⚠</span>
+      <h3>Could not load requests</h3>
+      <p>{{ errorMessage() }}</p>
+      <button class="retry-btn" (click)="loadRequests()">Try Again</button>
+    </div>
+  } @else if (requests().length === 0) {
+    <div class="state-card">
+      <span class="empty-icon">📋</span>
+      <h3>No cancellation requests</h3>
+      <p>You haven't submitted any cancellation requests yet.</p>
+    </div>
+  } @else {
+    <div class="table-card">
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Reason</th>
+              <th>Requested On</th>
+              <th>Status</th>
+              <th>Admin Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (req of requests(); track req.cancellationRequestId) {
+              <tr>
+                <td>
+                  <div class="course-info">
+                    <div class="course-avatar">
+                      {{ req.courseName.charAt(0).toUpperCase() }}
+                    </div>
+                    <div>
+                      <strong>{{ req.courseName }}</strong>
+                      <small>Enrollment #{{ req.enrollmentId }}</small>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="reason-text">{{ req.reason }}</span>
+                </td>
+                <td>{{ req.requestedAt | date: 'dd MMM yyyy' }}</td>
+                <td>
+                  <span class="status-badge" [ngClass]="statusClass(req.status)">
+                    {{ statusLabel(req.status) }}
+                  </span>
+                </td>
+                <td>
+                  @if (req.adminRemarks) {
+                    <span class="remarks">{{ req.adminRemarks }}</span>
+                  } @else {
+                    <span class="no-remarks">—</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span>Showing {{ requests().length }} of {{ totalRecords() }} requests</span>
+        <div>
+          <button (click)="previousPage()" [disabled]="pageNumber() === 1">Previous</button>
+          <span class="current-page">{{ pageNumber() }} / {{ totalPages() }}</span>
+          <button (click)="nextPage()" [disabled]="pageNumber() >= totalPages()">Next</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

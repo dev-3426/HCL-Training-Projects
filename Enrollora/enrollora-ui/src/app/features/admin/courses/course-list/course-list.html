@@ -1,0 +1,188 @@
+<div class="course-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">COURSE MANAGEMENT</span>
+      <h1>Courses</h1>
+      <p>Manage courses, fees, capacity and availability.</p>
+    </div>
+
+    <button class="btn-add"><span>+</span> Add New Course</button>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+    <div class="summary-card purple">
+      <div class="summary-icon">📚</div>
+      <div>
+        <span>Total Courses</span>
+        <h2>{{ totalRecords() }}</h2>
+      </div>
+    </div>
+
+    <div class="summary-card orange">
+      <div class="summary-icon">📖</div>
+      <div>
+        <span>Courses on This Page</span>
+        <h2>{{ courses().length }}</h2>
+      </div>
+    </div>
+
+    <div class="summary-card blue">
+      <div class="summary-icon">🪑</div>
+      <div>
+        <span>Available Seats</span>
+        <h2>{{ courses().reduce((total, course) => total + course.availableSeats, 0) }}</h2>
+      </div>
+    </div>
+
+    <div class="summary-card green">
+      <div class="summary-icon">✓</div>
+      <div>
+        <span>Active Courses</span>
+        <h2>{{ courses().filter((course) => course.isActive).length }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course Table -->
+  <div class="table-card">
+    <div class="table-header">
+      <div>
+        <h2>All Courses</h2>
+        <p>View and manage your available courses.</p>
+      </div>
+
+      <span class="record-count"> {{ totalRecords() }} courses </span>
+    </div>
+
+    <!-- Loading -->
+    @if (isLoading()) {
+      <div class="state-message">
+        <div class="loader"></div>
+        <p>Loading courses...</p>
+      </div>
+    }
+
+    <!-- Error -->
+    @else if (errorMessage()) {
+      <div class="state-message error-state">
+        <span>⚠️</span>
+        <p>{{ errorMessage() }}</p>
+        <button class="btn-retry" (click)="loadCourses()">Try Again</button>
+      </div>
+    }
+
+    <!-- Empty -->
+    @else if (courses().length === 0) {
+      <div class="state-message empty-state">
+        <span>📚</span>
+        <h3>No courses found</h3>
+        <p>There are currently no courses to display.</p>
+      </div>
+    }
+
+    <!-- Course Data -->
+    @else {
+      <div class="table-responsive">
+        <table class="course-table">
+          <thead>
+            <tr>
+              <th>COURSE</th>
+              <th>DURATION</th>
+              <th>FEES</th>
+              <th>ENROLLMENT</th>
+              <th>AVAILABLE SEATS</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (course of courses(); track course.courseId) {
+              <tr>
+                <td>
+                  <div class="course-info">
+                    <div class="course-avatar">
+                      {{ course.courseName.charAt(0).toUpperCase() }}
+                    </div>
+                    <div>
+                      <strong>{{ course.courseName }}</strong>
+                      <small>Course ID: #{{ course.courseId }}</small>
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <span class="duration">
+                    {{ course.duration }}
+                  </span>
+                </td>
+
+                <td>
+                  <strong class="fees"> ₹{{ course.fees | number: '1.0-2' }} </strong>
+                </td>
+
+                <td>
+                  <div class="enrollment-info">
+                    <strong> {{ course.enrolledCount }} / {{ course.capacity }} </strong>
+                    <div class="progress-track">
+                      <div
+                        class="progress-fill"
+                        [style.width.%]="
+                          course.capacity > 0 ? (course.enrolledCount / course.capacity) * 100 : 0
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <span
+                    class="seats-badge"
+                    [class.low-seats]="course.availableSeats <= 5 && course.availableSeats > 0"
+                    [class.no-seats]="course.availableSeats === 0"
+                  >
+                    {{ course.availableSeats }}
+                  </span>
+                </td>
+
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.active]="course.isActive"
+                    [class.inactive]="!course.isActive"
+                  >
+                    <span class="status-dot"></span>
+                    {{ course.isActive ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <!-- Pagination -->
+    @if (!isLoading() && !errorMessage() && totalRecords() > 0) {
+      <div class="pagination">
+        <span class="pagination-info">
+          Page {{ pageNumber() }} of {{ totalPages() }}
+          <span class="total-info">({{ totalRecords() }} courses)</span>
+        </span>
+
+        <div class="pagination-actions">
+          <button class="page-btn" (click)="previousPage()" [disabled]="pageNumber() === 1">
+            ← Previous
+          </button>
+
+          <span class="current-page">{{ pageNumber() }}</span>
+
+          <button class="page-btn" (click)="nextPage()" [disabled]="pageNumber() >= totalPages()">
+            Next →
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

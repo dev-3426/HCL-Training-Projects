@@ -1,0 +1,211 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.student-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f6ff;
+  color: #29213f;
+}
+
+.sidebar {
+  width: 265px;
+  min-width: 265px;
+  background: #24133f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 18px;
+  box-shadow: 6px 0 25px rgba(36, 19, 63, 0.12);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 27px;
+  font-weight: 850;
+  padding: 0 11px;
+  margin-bottom: 55px;
+  letter-spacing: -1px;
+}
+
+.brand-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff784f, #ff3d81);
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  font-weight: 900;
+  box-shadow: 0 6px 20px rgba(255, 61, 129, 0.3);
+}
+
+.section-label {
+  display: block;
+  color: #b9a8d2;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 0 12px;
+  margin-bottom: 17px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #d3c6e5;
+  text-decoration: none;
+  padding: 15px 13px;
+  margin-bottom: 9px;
+  border-radius: 11px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.22s ease;
+}
+
+.nav-link:hover {
+  background: #382452;
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.nav-link.active {
+  background: linear-gradient(110deg, #7545ed, #a33df0);
+  color: #fff;
+  font-weight: 800;
+  border-color: rgba(255,255,255,0.15);
+  box-shadow: 0 7px 20px rgba(117, 69, 237, 0.35);
+}
+
+.nav-icon {
+  width: 23px;
+  font-size: 21px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid #49345f;
+  padding: 22px 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.student-avatar {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #ff784f, #ff3d81);
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  font-weight: 850;
+}
+
+.student-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.student-info small {
+  color: #b9a8d2;
+  font-size: 12px;
+}
+
+.main-area {
+  flex: 1;
+  min-width: 0;
+  background:
+    radial-gradient(circle at 95% 0%, rgba(255, 91, 145, 0.09), transparent 24%),
+    #f8f6ff;
+}
+
+.topbar {
+  height: 84px;
+  background: rgba(255,255,255,0.96);
+  border-bottom: 1px solid #eee7f8;
+  padding: 0 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 18px rgba(56, 34, 87, 0.045);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topbar-title {
+  display: block;
+  font-size: 20px;
+  font-weight: 850;
+  color: #291743;
+}
+
+.topbar-subtitle {
+  display: block;
+  color: #8c819d;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.logout-btn {
+  background: #fff0ed;
+  color: #e64e42;
+  border: 1px solid #ffd4cd;
+  padding: 11px 21px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.page-content {
+  min-height: calc(100vh - 84px);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 76px;
+    min-width: 76px;
+    padding: 20px 8px;
+  }
+
+  .brand {
+    justify-content: center;
+    padding: 0;
+    font-size: 0;
+    margin-bottom: 40px;
+  }
+
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .section-label,
+  .student-info {
+    display: none;
+  }
+
+  .nav-link {
+    justify-content: center;
+    padding: 14px 5px;
+    font-size: 0;
+  }
+
+  .sidebar-footer {
+    justify-content: center;
+  }
+
+  .topbar {
+    height: 72px;
+    padding: 0 17px;
+  }
+}

@@ -1,0 +1,870 @@
+/* ==========================================
+   ENROLLORA - VIBRANT CREATIVE SAAS
+   STUDENT MANAGEMENT
+========================================== */
+
+:host {
+  display: block;
+  color: #29213f;
+}
+
+.students-page {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ==========================================
+   PAGE HEADING
+========================================== */
+
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.page-heading h2 {
+  font-size: 33px;
+  font-weight: 900;
+  color: #291743;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.page-heading p {
+  color: #81758f;
+  font-size: 15px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.student-count {
+  background: linear-gradient(120deg, #eee5ff, #ffe2ed);
+  color: #7739c9;
+  border: 1px solid #e2ccff;
+  padding: 12px 19px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 850;
+  box-shadow: 0 4px 12px rgba(117, 69, 237, 0.09);
+}
+
+/* ==========================================
+   FILTER CARD
+========================================== */
+
+.student-filter-card {
+  background: #ffffff;
+  border: 1px solid #eee5f8;
+  border-radius: 17px;
+  padding: 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 9px 28px rgba(73, 39, 112, 0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+.student-filter-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #7545ed, #ff3d81, #ff914d);
+}
+
+/* FILTER HEADER */
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.filter-header h5 {
+  font-size: 21px;
+  font-weight: 850;
+  color: #291743;
+  margin-bottom: 6px;
+}
+
+.filter-header p {
+  color: #8c819d;
+  font-size: 14px;
+  margin: 0;
+}
+
+.filter-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #7545ed, #a33df0);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 23px;
+  box-shadow: 0 6px 15px rgba(117, 69, 237, 0.24);
+}
+
+/* FILTER LABELS */
+
+.student-filter-card .form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 750;
+  color: #49365f;
+  margin-bottom: 9px;
+}
+
+/* FILTER INPUTS */
+
+.student-filter-card .form-control,
+.student-filter-card .form-select {
+  height: 48px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #352345;
+  background: #fbf9ff;
+  border: 1.5px solid #e4d9f1;
+  border-radius: 10px;
+  box-shadow: none;
+  padding: 10px 13px;
+  transition: all 0.2s ease;
+}
+
+.student-filter-card .form-control::placeholder {
+  color: #a397b3;
+  opacity: 1;
+}
+
+.student-filter-card .form-control:focus,
+.student-filter-card .form-select:focus {
+  background: #ffffff;
+  border-color: #8749ed;
+  box-shadow: 0 0 0 4px rgba(135, 73, 237, 0.12);
+}
+
+.range-inputs {
+  display: flex;
+  gap: 9px;
+}
+
+.range-inputs .form-control {
+  width: 50%;
+  min-width: 0;
+}
+
+/* FILTER FOOTER */
+
+.filter-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+  padding-top: 21px;
+  border-top: 1px solid #f0e9f7;
+}
+
+/* APPLY BUTTON */
+
+.btn-apply {
+  background: linear-gradient(110deg, #7545ed, #a33df0);
+  color: #ffffff;
+  border: none;
+  padding: 13px 27px;
+  font-size: 15px;
+  font-weight: 850;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(117, 69, 237, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-apply:hover {
+  background: linear-gradient(110deg, #6330d6, #8d2ed9);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 9px 20px rgba(117, 69, 237, 0.32);
+}
+
+/* RESET BUTTON */
+
+.btn-reset {
+  background: #fff0f3;
+  color: #dc416b;
+  border: 1px solid #ffd1dd;
+  padding: 12px 23px;
+  font-size: 15px;
+  font-weight: 750;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.btn-reset:hover {
+  background: #ffe0e9;
+  color: #b92e56;
+  border-color: #ffb5ca;
+}
+
+/* ==========================================
+   TABLE CARD
+========================================== */
+
+.table-card {
+  background: #ffffff;
+  border: 1px solid #e9e1f2;
+  border-radius: 17px;
+  overflow: hidden;
+  box-shadow: 0 9px 28px rgba(73, 39, 112, 0.065);
+}
+
+.table {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+/* TABLE HEADER */
+
+.table thead th {
+  background: #382052;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.65px;
+  padding: 20px 17px;
+  white-space: nowrap;
+  border-bottom: none;
+}
+
+/* TABLE BODY */
+
+.table tbody td {
+  padding: 19px 17px;
+  color: #594c69;
+  font-size: 14px;
+  font-weight: 500;
+  background: #ffffff;
+  border-bottom: 1px solid #f0eaf6;
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover td {
+  background: #faf6ff;
+}
+
+/* Keep all student action buttons in one row */
+.table tbody td:last-child {
+  white-space: nowrap;
+  min-width: 480px;
+}
+
+.table tbody td:last-child .btn {
+  flex-shrink: 0;
+  margin-right: 5px;
+}
+
+/* ==========================================
+   STUDENT INFORMATION
+========================================== */
+
+.student-info {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 220px;
+}
+
+.student-avatar {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #7545ed, #ff3d81);
+  color: #ffffff;
+  border-radius: 13px;
+  font-size: 16px;
+  font-weight: 900;
+  box-shadow: 0 4px 11px rgba(117, 69, 237, 0.18);
+}
+
+.student-info strong {
+  display: block;
+  color: #291743;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.student-info small {
+  display: block;
+  color: #92869f;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* ==========================================
+   STATUS BADGES
+========================================== */
+
+.status-badge {
+  display: inline-block;
+  padding: 8px 13px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.status-badge.pending {
+  background: #fff0c9;
+  color: #a85d00;
+  border: 1px solid #ffdf8b;
+}
+
+.status-badge.approved {
+  background: #d7f8e8;
+  color: #087c52;
+  border: 1px solid #a9ebc9;
+}
+
+.status-badge.rejected {
+  background: #ffe0e9;
+  color: #c32c58;
+  border: 1px solid #ffc0d1;
+}
+
+/* ==========================================
+   TABLE ACTION BUTTONS
+========================================== */
+
+.table tbody .btn {
+  font-size: 13px;
+  font-weight: 800;
+  padding: 9px 14px;
+  border-radius: 9px;
+  transition: all 0.2s ease;
+}
+
+.table tbody .btn-success {
+  background: #13b981;
+  border-color: #13b981;
+  color: #ffffff;
+}
+
+.table tbody .btn-success:hover {
+  background: #079669;
+  border-color: #079669;
+  transform: translateY(-1px);
+}
+
+.table tbody .btn-outline-danger {
+  color: #e34468;
+  border-color: #f19aaf;
+}
+
+.table tbody .btn-outline-danger:hover {
+  background: #e34468;
+  border-color: #e34468;
+  color: #ffffff;
+}
+
+/* ==========================================
+   LOADING AND EMPTY STATES
+========================================== */
+
+.loading-state {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #7545ed;
+}
+
+.loading-state p {
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 55px !important;
+  color: #92869f !important;
+  font-size: 15px;
+}
+
+/* ==========================================
+   PAGINATION
+========================================== */
+
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 21px 23px;
+  background: #fbf8ff;
+  border-top: 1px solid #eee5f8;
+}
+
+.pagination-info {
+  color: #766987;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.page-indicator {
+  color: #6937ba;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+/* PAGE SIZE */
+
+.page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-size-selector label {
+  color: #766987;
+  font-size: 14px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.page-size-selector select {
+  width: 80px;
+  height: 39px;
+  background: #ffffff;
+  color: #49365f;
+  border: 1px solid #ddcfee;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* PAGINATION BUTTONS */
+
+.pagination-controls button {
+  background: #ffffff;
+  color: #6937ba;
+  border: 1px solid #d9c7f0;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 9px 16px;
+  border-radius: 9px;
+  transition: all 0.2s ease;
+}
+
+.pagination-controls button:not(:disabled):hover {
+  background: #7545ed;
+  color: #ffffff;
+  border-color: #7545ed;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.4;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1200px) {
+  .table-card {
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 950px;
+  }
+}
+
+@media (max-width: 768px) {
+  .student-filter-card {
+    padding: 21px;
+  }
+
+  .filter-footer {
+    flex-wrap: wrap;
+  }
+
+  .pagination-container {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .page-heading h2 {
+    font-size: 27px;
+  }
+
+  .student-filter-card {
+    padding: 17px;
+  }
+
+  .filter-header h5 {
+    font-size: 18px;
+  }
+
+  .pagination-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pagination-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* ==========================================
+   STUDENT PROFILE MODAL - COMPACT
+========================================== */
+
+.student-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1055;
+  background: rgba(30, 15, 48, 0.68);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.student-modal {
+  width: 100%;
+  max-width: 510px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 17px;
+  box-shadow: 0 20px 60px rgba(27, 13, 48, 0.3);
+  animation: modalAppear 0.25s ease-out;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header */
+
+.student-modal-header {
+  background: linear-gradient(115deg, #5425ad, #913ce5 60%, #ec438d);
+  padding: 17px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #ffffff;
+}
+
+.modal-eyebrow {
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1.4px;
+  color: #f2d9ff;
+}
+
+.student-modal-header h3 {
+  font-size: 20px;
+  font-weight: 850;
+  margin: 5px 0 3px;
+}
+
+.student-modal-header p {
+  font-size: 12px;
+  color: #f0dfff;
+  margin: 0;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 23px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Body */
+
+.student-modal-body {
+  padding: 20px 23px 12px;
+}
+
+/* Profile */
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 19px;
+}
+
+.profile-avatar {
+  width: 57px;
+  height: 57px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #7545ed, #ff3d81);
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 900;
+  box-shadow: 0 6px 15px rgba(117, 69, 237, 0.24);
+}
+
+.profile-info h2 {
+  font-size: 19px;
+  font-weight: 850;
+  color: #291743;
+  margin: 0 0 3px;
+}
+
+.profile-info p {
+  color: #887b99;
+  font-size: 12px;
+  margin: 0 0 7px;
+  overflow-wrap: anywhere;
+}
+
+.profile-status {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.profile-status.pending {
+  background: #fff0c9;
+  color: #a85d00;
+}
+
+.profile-status.approved {
+  background: #d7f8e8;
+  color: #087c52;
+}
+
+.profile-status.rejected {
+  background: #ffe0e9;
+  color: #c32c58;
+}
+
+/* Academic Highlights */
+
+.academic-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-bottom: 19px;
+}
+
+.highlight-card {
+  padding: 12px 11px;
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid transparent;
+}
+
+.highlight-card span {
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.4px;
+}
+
+.highlight-card strong {
+  font-size: 19px;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.highlight-card small {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.cgpa-card {
+  background: #f0e8ff;
+  color: #7139c4;
+  border-color: #e1d0ff;
+}
+
+.department-card {
+  background: #ffe9f1;
+  color: #c53770;
+  border-color: #ffd1e2;
+}
+
+.age-card {
+  background: #fff0df;
+  color: #bc681e;
+  border-color: #ffdfbd;
+}
+
+/* Registration Details */
+
+.details-section {
+  border-top: 1px solid #eee7f5;
+  padding-top: 15px;
+}
+
+.details-section h5 {
+  font-size: 14px;
+  font-weight: 850;
+  color: #291743;
+  margin-bottom: 9px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid #f1edf5;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row span {
+  color: #887b99;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.detail-row strong {
+  color: #38234f;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: right;
+}
+
+/* Footer */
+
+.student-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 23px 17px;
+  border-top: 1px solid #f0eaf6;
+}
+
+.btn-close-modal {
+  padding: 9px 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #7545ed, #a33df0);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 850;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-close-modal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 13px rgba(117, 69, 237, 0.27);
+}
+
+/* Loading */
+
+.modal-loading {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  color: #7545ed;
+  font-weight: 650;
+}
+
+/* Responsive */
+
+@media (max-width: 576px) {
+  .student-modal {
+    max-width: 420px;
+  }
+
+  .student-modal-header {
+    padding: 15px 17px;
+  }
+
+  .student-modal-body {
+    padding: 17px 17px 10px;
+  }
+
+  .academic-highlights {
+    gap: 7px;
+  }
+
+  .highlight-card {
+    padding: 10px 8px;
+  }
+
+  .highlight-card strong {
+    font-size: 16px;
+  }
+
+  .profile-avatar {
+    width: 49px;
+    height: 49px;
+    font-size: 21px;
+  }
+
+  .profile-info h2 {
+    font-size: 17px;
+  }
+
+  .student-modal-footer {
+    padding: 11px 17px 14px;
+  }
+}

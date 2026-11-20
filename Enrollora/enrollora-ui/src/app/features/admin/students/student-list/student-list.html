@@ -1,0 +1,459 @@
+<div class="students-page">
+  <div class="page-heading">
+    <div>
+      <h2>Students</h2>
+      <p>Manage student registrations and approvals.</p>
+    </div>
+
+    <div class="student-count">Total Students: {{ totalRecords }}</div>
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-state">
+      <div class="spinner-border text-primary"></div>
+      <p>Loading students...</p>
+    </div>
+  } @else if (errorMessage) {
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+      <button class="btn btn-sm btn-outline-danger ms-3" (click)="loadStudents()">Retry</button>
+    </div>
+  } @else {
+    <div class="table-card">
+      <!-- Student Filters -->
+      <div class="student-filter-card">
+        <div class="filter-header">
+          <div>
+            <h5>Filter Students</h5>
+            <p>Find students using search and filter criteria</p>
+          </div>
+          <span class="filter-icon">☷</span>
+        </div>
+
+        <div class="row g-3">
+          <!-- Search -->
+          <div class="col-lg-4 col-md-6">
+            <label class="form-label">Search</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search by name or email"
+              [(ngModel)]="filters.search"
+            />
+          </div>
+
+          <!-- Status -->
+          <div class="col-lg-2 col-md-6">
+            <label class="form-label">Status</label>
+            <select class="form-select" [(ngModel)]="filters.status">
+              <option [ngValue]="null">All Statuses</option>
+              <option [ngValue]="0">Pending</option>
+              <option [ngValue]="1">Approved</option>
+              <option [ngValue]="2">Rejected</option>
+            </select>
+          </div>
+
+          <!-- Department -->
+          <div class="col-lg-2 col-md-6">
+            <label class="form-label">Department</label>
+            <select class="form-select" [(ngModel)]="filters.department">
+              <option value="">All Departments</option>
+              <option value="CSE">CSE</option>
+              <option value="ECE">ECE</option>
+              <option value="EEE">EEE</option>
+              <option value="IT">IT</option>
+              <option value="Mechanical">Mechanical</option>
+            </select>
+          </div>
+
+          <!-- Age Range -->
+          <div class="col-lg-2 col-md-6">
+            <label class="form-label">Age Range</label>
+            <div class="range-inputs">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Min"
+                [(ngModel)]="filters.minAge"
+              />
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Max"
+                [(ngModel)]="filters.maxAge"
+              />
+            </div>
+          </div>
+
+          <!-- CGPA Range -->
+          <div class="col-lg-2 col-md-6">
+            <label class="form-label">CGPA Range</label>
+            <div class="range-inputs">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Min"
+                min="0"
+                max="10"
+                step="0.1"
+                [(ngModel)]="filters.minCgpa"
+              />
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Max"
+                min="0"
+                max="10"
+                step="0.1"
+                [(ngModel)]="filters.maxCgpa"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-footer">
+          <button class="btn btn-apply" (click)="applyFilters()">Apply Filters</button>
+
+          <button class="btn btn-reset" (click)="clearFilters()">
+            <i class="bi bi-arrow-counterclockwise"></i>
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Student Table -->
+      <div class="table-responsive">
+        <table class="table align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Department</th>
+              <th>Age</th>
+              <th>CGPA</th>
+              <th>Status</th>
+              <th>Registered Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (student of students; track student.studentId) {
+              <tr>
+                <td>
+                  <div class="student-info">
+                    <div class="student-avatar">
+                      {{ student.name.charAt(0).toUpperCase() }}
+                    </div>
+
+                    <div>
+                      <strong>{{ student.name }}</strong>
+                      <small>{{ student.email }}</small>
+                    </div>
+                  </div>
+                </td>
+
+                <td>{{ student.department }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.cgpa | number: '1.2-2' }}</td>
+
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.pending]="student.status === 0"
+                    [class.approved]="student.status === 1"
+                    [class.rejected]="student.status === 2"
+                  >
+                    {{
+                      student.status === 0
+                        ? 'Pending'
+                        : student.status === 1
+                          ? 'Approved'
+                          : student.status === 2
+                            ? 'Rejected'
+                            : 'Unknown'
+                    }}
+                  </span>
+                </td>
+
+                <td>{{ student.registeredAt | date: 'dd MMM yyyy' }}</td>
+
+                <!-- Actions -->
+                <td>
+                  <div class="d-flex gap-2 flex-wrap">
+                    <button
+                      class="btn btn-sm btn-outline-primary"
+                      (click)="viewStudent(student.studentId)"
+                    >
+                      View
+                    </button>
+
+                    <button
+                      class="btn btn-sm btn-outline-secondary"
+                      (click)="editStudent(student.studentId)"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      class="btn btn-sm btn-outline-danger"
+                      (click)="deleteStudent(student.studentId)"
+                    >
+                      Delete
+                    </button>
+
+                    @if (student.status === 0) {
+                      <button
+                        class="btn btn-sm btn-success"
+                        (click)="approveStudent(student.studentId)"
+                      >
+                        Approve
+                      </button>
+
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        (click)="rejectStudent(student.studentId)"
+                      >
+                        Reject
+                      </button>
+                    } @else {
+                      <span class="text-muted align-self-center">Reviewed</span>
+                    }
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="7" class="empty-state">No students found.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <div class="pagination-info">
+        Showing {{ students.length }} of {{ totalRecords }} students
+      </div>
+
+      <div class="page-size-selector">
+        <label for="pageSize">Rows per page:</label>
+
+        <select
+          #pageselect
+          id="pageSize"
+          class="form-select form-select-sm"
+          [value]="pageSize"
+          (change)="changePageSize(pageselect.value)"
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+
+      <div class="pagination-controls">
+        <button
+          class="btn btn-outline-primary btn-sm"
+          [disabled]="pageNumber === 1 || isLoading"
+          (click)="goToPreviousPage()"
+        >
+          Previous
+        </button>
+
+        <span class="page-indicator"> Page {{ pageNumber }} of {{ totalPages }} </span>
+
+        <button
+          class="btn btn-outline-primary btn-sm"
+          [disabled]="pageNumber === totalPages || isLoading"
+          (click)="goToNextPage()"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  }
+</div>
+
+<!-- Student Details Modal -->
+@if (selectedStudent || isDetailsLoading || detailsError) {
+  <div class="student-modal-backdrop">
+    <div class="student-modal">
+      <!-- Modal Header -->
+      <div class="student-modal-header">
+        <div>
+          <span class="modal-eyebrow">STUDENT PROFILE</span>
+          <h3>Student Details</h3>
+          <p>Registration information and academic profile</p>
+        </div>
+
+        <button
+          type="button"
+          class="modal-close"
+          aria-label="Close"
+          (click)="selectedStudent = null; detailsError = ''"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Loading -->
+      @if (isDetailsLoading) {
+        <div class="modal-loading">
+          <div class="spinner-border text-primary"></div>
+          <p>Loading student profile...</p>
+        </div>
+      }
+
+      <!-- Error -->
+      @else if (detailsError) {
+        <div class="alert alert-danger m-4">
+          {{ detailsError }}
+        </div>
+      }
+
+      <!-- Student Information -->
+      @else if (selectedStudent) {
+        <div class="student-modal-body">
+          <!-- Profile -->
+          <div class="profile-section">
+            <div class="profile-avatar">
+              {{ selectedStudent.name.charAt(0).toUpperCase() }}
+            </div>
+
+            <div class="profile-info">
+              <h2>{{ selectedStudent.name }}</h2>
+              <p>{{ selectedStudent.email }}</p>
+              <span
+                class="profile-status"
+                [class.pending]="selectedStudent.status === 0"
+                [class.approved]="selectedStudent.status === 1"
+                [class.rejected]="selectedStudent.status === 2"
+              >
+                {{
+                  selectedStudent.status === 0
+                    ? 'Pending Approval'
+                    : selectedStudent.status === 1
+                      ? 'Approved'
+                      : 'Rejected'
+                }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Academic Highlights -->
+          <div class="academic-highlights">
+            <div class="highlight-card cgpa-card">
+              <span>CGPA</span>
+              <strong>{{ selectedStudent.cgpa | number: '1.2-2' }}</strong>
+              <small>Academic Performance</small>
+            </div>
+
+            <div class="highlight-card department-card">
+              <span>DEPARTMENT</span>
+              <strong>{{ selectedStudent.department }}</strong>
+              <small>Academic Branch</small>
+            </div>
+
+            <div class="highlight-card age-card">
+              <span>AGE</span>
+              <strong>{{ selectedStudent.age }}</strong>
+              <small>Years old</small>
+            </div>
+          </div>
+
+          <!-- Registration Information -->
+          <div class="details-section">
+            <h5>Registration Information</h5>
+
+            <div class="detail-row">
+              <span>Student ID</span>
+              <strong>#{{ selectedStudent.studentId }}</strong>
+            </div>
+
+            <div class="detail-row">
+              <span>Registered On</span>
+              <strong>
+                {{ selectedStudent.registeredAt | date: 'dd MMM yyyy' }}
+              </strong>
+            </div>
+
+            <div class="detail-row">
+              <span>Reviewed On</span>
+              <strong>
+                {{
+                  selectedStudent.reviewedAt
+                    ? (selectedStudent.reviewedAt | date: 'dd MMM yyyy')
+                    : 'Not reviewed yet'
+                }}
+              </strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="student-modal-footer">
+          <button class="btn-close-modal" (click)="selectedStudent = null">Close Profile</button>
+        </div>
+      }
+    </div>
+  </div>
+}
+
+<!-- Edit Student Modal -->
+@if (isEditModalOpen) {
+  <div class="student-modal-backdrop">
+    <div class="student-modal">
+      <div class="student-modal-header">
+        <div>
+          <span class="modal-eyebrow">STUDENT MANAGEMENT</span>
+          <h3>Edit Student</h3>
+          <p>Update student information</p>
+        </div>
+
+        <button type="button" class="modal-close" (click)="closeEditModal()">&times;</button>
+      </div>
+
+      <div class="student-modal-body">
+        <form [formGroup]="studentForm" (ngSubmit)="updateStudent()">
+          <div class="mb-3">
+            <label class="form-label">Student Name</label>
+            <input type="text" class="form-control" formControlName="name" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" formControlName="email" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Department</label>
+            <input type="text" class="form-control" formControlName="department" />
+          </div>
+
+          <div class="row">
+            <div class="col-6 mb-3">
+              <label class="form-label">Age</label>
+              <input type="number" class="form-control" formControlName="age" />
+            </div>
+
+            <div class="col-6 mb-3">
+              <label class="form-label">CGPA</label>
+              <input type="number" class="form-control" step="0.01" formControlName="cgpa" />
+            </div>
+          </div>
+
+          <div class="student-modal-footer">
+            <button type="button" class="btn btn-light" (click)="closeEditModal()">Cancel</button>
+
+            <button type="submit" class="btn-close-modal" [disabled]="studentForm.invalid">
+              Update Student
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+}

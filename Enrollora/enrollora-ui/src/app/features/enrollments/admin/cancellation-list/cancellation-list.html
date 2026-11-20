@@ -1,0 +1,221 @@
+<div class="page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h2>Cancellation Requests</h2>
+      <p>Review and act on student enrollment cancellation requests.</p>
+    </div>
+    <div class="header-icon">↻</div>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary-cards">
+    <div class="summary-card">
+      <div class="summary-icon pending-icon">⏳</div>
+      <div>
+        <span>Total Requests</span>
+        <h3>{{ totalRecords() }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-bar">
+    <input
+      id="searchInput"
+      class="filter-input"
+      type="text"
+      placeholder="Search by student name or email…"
+      [value]="searchTerm()"
+      (input)="searchTerm.set($any($event.target).value)"
+      (keyup.enter)="applyFilters()"
+    />
+    <select
+      id="statusFilter"
+      class="filter-select"
+      [value]="statusFilter()"
+      (change)="statusFilter.set($any($event.target).value === '' ? null : +$any($event.target).value); applyFilters()"
+    >
+      @for (opt of statusOptions; track opt.label) {
+        <option [value]="opt.value ?? ''">{{ opt.label }}</option>
+      }
+    </select>
+    <button class="btn-search" (click)="applyFilters()">Search</button>
+    <button class="btn-clear" (click)="clearFilters()">Clear</button>
+  </div>
+
+  <!-- Loading -->
+  @if (isLoading()) {
+    <div class="state-message">
+      <div class="loader"></div>
+      <p>Loading requests...</p>
+    </div>
+  }
+
+  <!-- Error -->
+  @if (errorMessage()) {
+    <div class="alert-error">
+      ⚠ {{ errorMessage() }}
+      <button class="retry-link" (click)="loadRequests()">Retry</button>
+    </div>
+  }
+
+  <!-- Table -->
+  @if (!isLoading() && !errorMessage()) {
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Reason</th>
+            <th>Requested On</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (req of requests(); track req.cancellationRequestId) {
+            <tr>
+              <td>
+                <div class="student-info">
+                  <div class="student-avatar">
+                    {{ req.studentName.charAt(0).toUpperCase() }}
+                  </div>
+                  <div>
+                    <div class="student-name">{{ req.studentName }}</div>
+                    <div class="student-email">{{ req.studentEmail }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="course-name">{{ req.courseName }}</span>
+                <small class="enrollment-id">Enrollment #{{ req.enrollmentId }}</small>
+              </td>
+              <td>
+                <span class="reason-text">{{ req.reason }}</span>
+              </td>
+              <td>{{ req.requestedAt | date: 'dd MMM yyyy' }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="statusClass(req.status)">
+                  {{ statusLabel(req.status) }}
+                </span>
+              </td>
+              <td>
+                @if (req.status === CancellationStatus.Pending) {
+                  <div class="action-btns">
+                    <button
+                      class="btn-approve"
+                      (click)="openReviewModal(req, 'approve')"
+                    >
+                      ✓ Approve
+                    </button>
+                    <button
+                      class="btn-reject"
+                      (click)="openReviewModal(req, 'reject')"
+                    >
+                      ✕ Reject
+                    </button>
+                  </div>
+                } @else {
+                  <div class="reviewed-info">
+                    <small>Reviewed {{ req.reviewedAt | date: 'dd MMM yyyy' }}</small>
+                    @if (req.adminRemarks) {
+                      <span class="remarks">{{ req.adminRemarks }}</span>
+                    }
+                  </div>
+                }
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-state">
+                <span>📋</span>
+                <p>No cancellation requests found.</p>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <span>Showing {{ requests().length }} of {{ totalRecords() }} requests</span>
+      <div class="pagination-actions">
+        <button [disabled]="pageNumber() === 1" (click)="previousPage()">Previous</button>
+        <span class="page-indicator">{{ pageNumber() }} / {{ totalPages() }}</span>
+        <button [disabled]="pageNumber() >= totalPages()" (click)="nextPage()">Next</button>
+      </div>
+    </div>
+  }
+</div>
+
+<!-- Review Modal -->
+@if (showReviewModal()) {
+  <div class="modal-backdrop" (click)="closeReviewModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-header" [class.approve-header]="reviewAction() === 'approve'" [class.reject-header]="reviewAction() === 'reject'">
+        <div class="modal-icon">
+          {{ reviewAction() === 'approve' ? '✓' : '✕' }}
+        </div>
+        <div>
+          <h2>{{ reviewAction() === 'approve' ? 'Approve' : 'Reject' }} Request</h2>
+          <p>{{ selectedRequest()?.studentName }} — {{ selectedRequest()?.courseName }}</p>
+        </div>
+        <button class="modal-close" (click)="closeReviewModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        @if (reviewSuccess()) {
+          <div class="alert-success">✓ {{ reviewSuccess() }}</div>
+        } @else {
+          <!-- Reason preview -->
+          <div class="reason-preview">
+            <label class="field-label">Student's Reason</label>
+            <p class="reason-quote">"{{ selectedRequest()?.reason }}"</p>
+          </div>
+
+          <label class="field-label" for="adminRemarks">
+            Admin Remarks <span class="optional">(optional)</span>
+          </label>
+          <textarea
+            id="adminRemarks"
+            class="remarks-input"
+            rows="3"
+            maxlength="1000"
+            placeholder="Add any remarks or notes for the student…"
+            [value]="adminRemarks()"
+            (input)="adminRemarks.set($any($event.target).value)"
+          ></textarea>
+
+          @if (reviewError()) {
+            <div class="alert-error-inline">⚠ {{ reviewError() }}</div>
+          }
+        }
+      </div>
+
+      @if (!reviewSuccess()) {
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="closeReviewModal()" [disabled]="isReviewing()">
+            Cancel
+          </button>
+          <button
+            class="btn-confirm"
+            [class.confirm-approve]="reviewAction() === 'approve'"
+            [class.confirm-reject]="reviewAction() === 'reject'"
+            (click)="submitReview()"
+            [disabled]="isReviewing()"
+          >
+            @if (isReviewing()) {
+              <span class="btn-spinner"></span>
+              Processing…
+            } @else {
+              {{ reviewAction() === 'approve' ? 'Confirm Approval' : 'Confirm Rejection' }}
+            }
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+}

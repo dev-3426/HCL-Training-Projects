@@ -1,0 +1,167 @@
+<div class="dashboard-page">
+  <div class="dashboard-heading">
+    <div>
+      <span class="eyebrow">STUDENT PORTAL</span>
+      <h1>Welcome back</h1>
+      <p>Here is a quick overview of your learning activity.</p>
+    </div>
+    <span class="live-status"><span></span> Learning Dashboard</span>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="loader"></div>
+      <p>Loading dashboard...</p>
+    </div>
+  } @else {
+    @if (courseError() || enrollmentError()) {
+      <div class="alert error-alert">
+        <span>⚠</span>
+        {{ courseError() || enrollmentError() }}
+        <button class="retry-btn" (click)="loadDashboard()">Try Again</button>
+      </div>
+    }
+
+    <div class="summary-grid">
+      <article class="summary-card purple">
+        <div class="summary-icon">▤</div>
+        <div>
+          <span>Available Courses</span>
+          <h2>{{ availableCourseCount() }}</h2>
+          <small>Courses open for enrollment</small>
+        </div>
+      </article>
+
+      <article class="summary-card green">
+        <div class="summary-icon">✓</div>
+        <div>
+          <span>Active Enrollments</span>
+          <h2>{{ activeEnrollmentCount() }}</h2>
+          <small>Your active registrations</small>
+        </div>
+      </article>
+
+      <article class="summary-card orange">
+        <div class="summary-icon">▣</div>
+        <div>
+          <span>Total Enrollments</span>
+          <h2>{{ totalEnrollmentCount() }}</h2>
+          <small>Your enrollment records</small>
+        </div>
+      </article>
+
+      <article class="summary-card blue">
+        <div class="summary-icon">♙</div>
+        <div>
+          <span>Open Seats</span>
+          <h2>{{ openSeatCount() }}</h2>
+          <small>Across available courses</small>
+        </div>
+      </article>
+    </div>
+
+    <div class="dashboard-grid">
+      <section class="panel recent-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Recent Enrollments</h2>
+            <p>Your latest course registrations</p>
+          </div>
+          <a routerLink="/student/enrollments">View All</a>
+        </div>
+
+        @if (enrollmentError()) {
+          <div class="panel-empty">
+            <span>⚠</span>
+            <p>{{ enrollmentError() }}</p>
+          </div>
+        } @else if (recentEnrollments().length === 0) {
+          <div class="panel-empty">
+            <span>🎓</span>
+            <h3>No enrollments yet</h3>
+            <p>Enroll in a course to begin your learning journey.</p>
+            <a class="primary-link" routerLink="/student/courses">Browse Courses</a>
+          </div>
+        } @else {
+          <div class="enrollment-list">
+            @for (enrollment of recentEnrollments(); track enrollment.enrollmentId) {
+              <article class="enrollment-row">
+                <div class="course-avatar">
+                  {{ enrollment.courseName.charAt(0).toUpperCase() }}
+                </div>
+                <div class="enrollment-main">
+                  <strong>{{ enrollment.courseName }}</strong>
+                  <small>{{ enrollment.enrolledAt | date: 'dd MMM yyyy' }}</small>
+                </div>
+                <span
+                  class="status-badge"
+                  [class.active]="enrollment.status === 1"
+                  [class.cancelled]="enrollment.status !== 1"
+                >
+                  {{ statusLabel(enrollment.status) }}
+                </span>
+              </article>
+            }
+          </div>
+        }
+      </section>
+
+      <section class="panel courses-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Courses to Explore</h2>
+            <p>Popular active options</p>
+          </div>
+          <a routerLink="/student/courses">Browse</a>
+        </div>
+
+        @if (courseError()) {
+          <div class="panel-empty">
+            <span>⚠</span>
+            <p>{{ courseError() }}</p>
+          </div>
+        } @else if (availableCourses().length === 0) {
+          <div class="panel-empty">
+            <span>📚</span>
+            <h3>No open courses</h3>
+            <p>Check back when new seats become available.</p>
+          </div>
+        } @else {
+          <div class="course-list">
+            @for (course of availableCourses(); track course.courseId) {
+              <article class="course-row">
+                <div>
+                  <strong>{{ course.courseName }}</strong>
+                  <small>{{ course.duration }} · ₹{{ course.fees | number: '1.0-2' }}</small>
+                </div>
+                <span [class.low]="course.availableSeats <= 5">
+                  {{ course.availableSeats }} seats
+                </span>
+              </article>
+            }
+          </div>
+        }
+      </section>
+    </div>
+
+    <section class="quick-actions">
+      <a routerLink="/student/courses" class="action-card purple-action">
+        <div class="action-icon">▤</div>
+        <div>
+          <strong>Find a Course</strong>
+          <span>Explore available courses</span>
+        </div>
+        <b>→</b>
+      </a>
+
+      <a routerLink="/student/enrollments" class="action-card coral-action">
+        <div class="action-icon">▣</div>
+        <div>
+          <strong>My Enrollments</strong>
+          <span>Review your registrations</span>
+        </div>
+        <b>→</b>
+      </a>
+    </section>
+  }
+</div>

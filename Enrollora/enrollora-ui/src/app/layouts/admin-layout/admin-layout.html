@@ -1,0 +1,62 @@
+<div class="admin-wrapper">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-icon">E</span>
+      <span>Enrollora</span>
+    </div>
+
+    <div class="sidebar-section">
+      <small class="section-label">MAIN MENU</small>
+
+      <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link">
+        <span class="nav-icon">▦</span>
+        Dashboard
+      </a>
+
+      <a routerLink="/admin/students" routerLinkActive="active" class="nav-link">
+        <span class="nav-icon">♙</span>
+        Students
+      </a>
+
+      <a routerLink="/admin/courses" routerLinkActive="active" class="nav-link">
+        <span class="nav-icon">▤</span>
+        Courses
+      </a>
+
+      <a routerLink="/admin/enrollments" routerLinkActive="active" class="nav-link">
+        <span class="nav-icon">▣</span>
+        Enrollments
+      </a>
+
+      <a routerLink="/admin/cancellations" routerLinkActive="active" class="nav-link">
+        <span class="nav-icon">↻</span>
+        Cancellation Requests
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="admin-avatar">A</div>
+      <div class="admin-info">
+        <strong>Administrator</strong>
+        <small>System Admin</small>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main area -->
+  <main class="main-area">
+    <header class="topbar">
+      <div>
+        <span class="topbar-title">Administration</span>
+        <small class="topbar-subtitle">Manage your learning platform</small>
+      </div>
+
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </header>
+
+    <section class="page-content">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>
