@@ -33,4 +33,30 @@ export class TokenService {
   hasToken(): boolean {
     return this.getToken() !== null;
   }
+
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) {
+      return true;
+    }
+
+    try {
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        return true;
+      }
+
+      const payloadBase64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+      const payloadJson = atob(payloadBase64);
+      const payload = JSON.parse(payloadJson) as { exp?: number };
+
+      if (!payload.exp) {
+        return true;
+      }
+
+      return payload.exp * 1000 <= Date.now();
+    } catch {
+      return true;
+    }
+  }
 }

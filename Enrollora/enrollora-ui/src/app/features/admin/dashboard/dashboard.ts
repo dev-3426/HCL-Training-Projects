@@ -1,6 +1,6 @@
 import { DashboardService } from './dashboard.service';
 import { DashboardSummary } from './dashboard.models';
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
@@ -9,6 +9,7 @@ import { DecimalPipe } from '@angular/common';
   imports: [DecimalPipe],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dashboard implements OnInit {
   private dashboardService = inject(DashboardService);

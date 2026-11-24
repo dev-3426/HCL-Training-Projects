@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { StudentService } from '../student.service';
 import { StudentResponse, StudentFilter, UpdateStudentRequest } from '../student.models';
@@ -12,6 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   imports: [DatePipe, DecimalPipe, FormsModule, ReactiveFormsModule],
   templateUrl: './student-list.html',
   styleUrl: './student-list.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentList implements OnInit {
   private studentService = inject(StudentService);
@@ -191,9 +192,13 @@ export class StudentList implements OnInit {
           age: student.age,
           cgpa: student.cgpa,
         });
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Failed to load student details', error);
+        alert(error.error?.detail || error.error?.message || 'Unable to load student details.');
+        this.closeEditModal();
+        this.cdr.markForCheck();
       },
     });
   }
@@ -234,6 +239,8 @@ export class StudentList implements OnInit {
       },
       error: (error) => {
         console.error('Failed to update student:', error);
+        alert(error.error?.detail || error.error?.message || 'Unable to update student.');
+        this.cdr.markForCheck();
       },
     });
   }
@@ -245,10 +252,15 @@ export class StudentList implements OnInit {
 
     this.studentService.deleteStudent(id).subscribe({
       next: () => {
+        if (this.students.length === 1 && this.pageNumber > 1) {
+          this.pageNumber--;
+        }
         this.loadStudents();
       },
       error: (error) => {
         console.error('Failed to delete student:', error);
+        alert(error.error?.detail || error.error?.message || 'Unable to delete student.');
+        this.cdr.markForCheck();
       },
     });
   }

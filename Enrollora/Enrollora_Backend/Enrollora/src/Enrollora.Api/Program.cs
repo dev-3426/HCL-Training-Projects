@@ -84,9 +84,9 @@ builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 var app = builder.Build();
 
-app.UseMiddleware<GlobalExceptionHandler>();
-app.UseHttpsRedirection();
 app.UseCors("AngularClient");
+app.UseHttpsRedirection();
+app.UseMiddleware<GlobalExceptionHandler>();
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Enrollora.Api.Services;
 
-public sealed class StudentService(IRepository<Student> students) : IStudentService
+public sealed class StudentService(IRepository<Student> students,IRepository<AdminUser> admins) : IStudentService
 {
     public async Task<PagedResult<StudentResponse>> GetStudentsAsync(StudentQuery query, CancellationToken ct)
     {
@@ -56,17 +56,39 @@ public sealed class StudentService(IRepository<Student> students) : IStudentServ
         await UpdateAsync(studentId, request, ct);
 
     public async Task<StudentResponse> UpdateAsync(
-        int id, UpdateStudentRequest request, CancellationToken ct)
-    {
-        var student = await FindAsync(id, ct);
-        student.Name = request.Name.Trim();
-        student.Department = request.Department.Trim();
-        student.Age = request.Age;
-        student.CGPA = request.CGPA;
-        students.Update(student);
-        await students.SaveChangesAsync(ct);
-        return Map(student);
-    }
+    int id, UpdateStudentRequest request, CancellationToken ct)
+{
+    var student = await FindAsync(id, ct);
+
+    var email = request.Email.Trim().ToLowerInvariant();
+
+    // Check whether another student already uses this email
+    var studentEmailExists = await students.Query()
+        .AnyAsync(x => x.StudentId != id && x.Email == email, ct);
+
+    if (studentEmailExists)
+        throw new InvalidOperationException(
+            "This email is already registered to another student.");
+
+    // Check whether an administrator already uses this email
+    var adminEmailExists = await admins.Query()
+        .AnyAsync(x => x.Email == email, ct);
+
+    if (adminEmailExists)
+        throw new InvalidOperationException(
+            "This email is already registered to an administrator.");
+
+    student.Name = request.Name.Trim();
+    student.Email = email;
+    student.Department = request.Department.Trim();
+    student.Age = request.Age;
+    student.CGPA = request.CGPA;
+
+    students.Update(student);
+    await students.SaveChangesAsync(ct);
+
+    return Map(student);
+}
 
     public async Task ReviewAsync(int id, StudentStatus status, CancellationToken ct)
     {

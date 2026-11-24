@@ -26,7 +26,23 @@ public sealed class GlobalExceptionHandler(
                 _ => (StatusCodes.Status500InternalServerError, "An unexpected error occurred")
             };
 
+            if (context.Response.HasStarted)
+            {
+                throw;
+            }
+
+            var preservedHeaders = context.Response.Headers
+                .Where(h => h.Key.StartsWith("Access-Control-", StringComparison.OrdinalIgnoreCase) ||
+                            string.Equals(h.Key, "Vary", StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
             context.Response.Clear();
+
+            foreach (var header in preservedHeaders)
+            {
+                context.Response.Headers[header.Key] = header.Value;
+            }
+
             context.Response.StatusCode = status;
             context.Response.ContentType = "application/problem+json";
 

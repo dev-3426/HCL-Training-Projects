@@ -7,8 +7,22 @@
       <p>Manage courses, fees, capacity and availability.</p>
     </div>
 
-    <button class="btn-add"><span>+</span> Add New Course</button>
+    <button class="btn-add" (click)="openCreateModal()"><span>+</span> Add New Course</button>
   </div>
+
+  @if (actionMessage()) {
+    <div class="feedback-banner success-banner">
+      <span>{{ actionMessage() }}</span>
+      <button type="button" class="banner-close" (click)="actionMessage.set('')">×</button>
+    </div>
+  }
+
+  @if (actionError()) {
+    <div class="feedback-banner error-banner">
+      <span>{{ actionError() }}</span>
+      <button type="button" class="banner-close" (click)="actionError.set('')">×</button>
+    </div>
+  }
 
   <!-- Summary Cards -->
   <div class="summary-grid">
@@ -94,6 +108,7 @@
               <th>ENROLLMENT</th>
               <th>AVAILABLE SEATS</th>
               <th>STATUS</th>
+              <th>ACTIONS</th>
             </tr>
           </thead>
 
@@ -156,6 +171,24 @@
                     {{ course.isActive ? 'Active' : 'Inactive' }}
                   </span>
                 </td>
+
+                <td>
+                  <div class="actions-cell">
+                    <button type="button" class="btn-action btn-edit" (click)="openEditModal(course)">
+                      Edit
+                    </button>
+                    @if (course.isActive) {
+                      <button
+                        type="button"
+                        class="btn-action btn-deactivate"
+                        [disabled]="processingCourseId() === course.courseId"
+                        (click)="deactivateCourse(course)"
+                      >
+                        {{ processingCourseId() === course.courseId ? 'Deactivating...' : 'Deactivate' }}
+                      </button>
+                    }
+                  </div>
+                </td>
               </tr>
             }
           </tbody>
@@ -185,4 +218,91 @@
       </div>
     }
   </div>
+
+  <!-- Create / Edit Course Modal -->
+  @if (showModal()) {
+    <div class="modal-backdrop" (click)="closeModal()">
+      <div class="modal-card" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <div>
+            <span class="eyebrow">{{ isEditMode() ? 'UPDATE COURSE' : 'NEW COURSE' }}</span>
+            <h3>{{ isEditMode() ? 'Edit Course' : 'Add New Course' }}</h3>
+          </div>
+          <button type="button" class="modal-close" (click)="closeModal()">×</button>
+        </div>
+
+        <form [formGroup]="courseForm" (ngSubmit)="saveCourse()" class="modal-form">
+          <div class="form-field">
+            <label for="courseName">Course Name</label>
+            <input
+              id="courseName"
+              type="text"
+              formControlName="courseName"
+              placeholder="e.g. Full-Stack Web Development"
+            />
+            @if (courseForm.controls.courseName.invalid && courseForm.controls.courseName.touched) {
+              <small class="field-error">Course name is required (max 150 characters).</small>
+            }
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="duration">Duration</label>
+              <input
+                id="duration"
+                type="text"
+                formControlName="duration"
+                placeholder="e.g. 12 Weeks"
+              />
+              @if (courseForm.controls.duration.invalid && courseForm.controls.duration.touched) {
+                <small class="field-error">Duration is required (max 80 characters).</small>
+              }
+            </div>
+
+            <div class="form-field">
+              <label for="fees">Fees (₹)</label>
+              <input id="fees" type="number" min="0" step="0.01" formControlName="fees" />
+              @if (courseForm.controls.fees.invalid && courseForm.controls.fees.touched) {
+                <small class="field-error">Fees must be 0 or greater.</small>
+              }
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="capacity">Capacity</label>
+              <input id="capacity" type="number" min="1" formControlName="capacity" />
+              @if (courseForm.controls.capacity.invalid && courseForm.controls.capacity.touched) {
+                <small class="field-error">Capacity must be at least 1.</small>
+              }
+            </div>
+
+            <div class="form-field checkbox-field">
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="isActive" />
+                <span>Active (open for enrollment)</span>
+              </label>
+            </div>
+          </div>
+
+          @if (modalError()) {
+            <div class="modal-error">{{ modalError() }}</div>
+          }
+
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" (click)="closeModal()" [disabled]="isSaving()">
+              Cancel
+            </button>
+            <button type="submit" class="btn-save" [disabled]="isSaving()">
+              @if (isSaving()) {
+                Saving...
+              } @else {
+                {{ isEditMode() ? 'Update Course' : 'Create Course' }}
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
 </div>

@@ -1,10 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth.service';
 import { LoginRequest } from '../../../core/auth/auth.models';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -33,11 +31,13 @@ export class Login {
     this.authService.login(this.loginRequest).subscribe({
       next: (response) => {
         this.isLoading = false;
-        if(response.role === 'Administrator') {
+        if (response.role === 'Administrator') {
           this.router.navigate(['/admin/dashboard']);
-        } else if(response.role === 'Student') {
+        } else if (response.role === 'Student') {
           this.router.navigate(['/student/dashboard']);
-        } 
+        } else {
+          this.errorMessage = 'Unrecognized user role.';
+        }
       },
 
       error: (error) => {

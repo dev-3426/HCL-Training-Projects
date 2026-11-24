@@ -38,14 +38,13 @@ export class AvailableCourses implements OnInit {
     this.errorMessage.set('');
 
     this.courseService
-      .getCourses(this.pageNumber(), this.pageSize(), { isActive: true })
+      .getCourses(this.pageNumber(), this.pageSize(), {
+        isActive: true,
+        availability: 'available',
+      })
       .subscribe({
         next: (response) => {
-          this.courses.set(
-            response.items.filter(
-              (course) => course.isActive && course.availableSeats > 0,
-            ),
-          );
+          this.courses.set(response.items);
           this.totalRecords.set(response.totalRecords);
           this.totalPages.set(response.totalPages);
           this.isLoading.set(false);

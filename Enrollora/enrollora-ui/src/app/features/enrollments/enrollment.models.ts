@@ -1,5 +1,10 @@
 import { PagedResult } from '../../shared/models/paged-result.model';
 
+export enum EnrollmentStatus {
+  Active = 0,
+  Cancelled = 1,
+}
+
 export interface EnrollmentResponse {
   enrollmentId: number;
   studentId: number;

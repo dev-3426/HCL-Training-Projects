@@ -85,10 +85,10 @@
               <td>
                 <span
                   class="status-badge"
-                  [class.active]="enrollment.status === 1"
-                  [class.inactive]="enrollment.status !== 1"
+                  [class.active]="enrollment.status === EnrollmentStatus.Active"
+                  [class.inactive]="enrollment.status !== EnrollmentStatus.Cancelled"
                 >
-                  {{ enrollment.status === 1 ? 'Active' : 'Cancelled' }}
+                  {{ enrollment.status === EnrollmentStatus.Active  ? 'Active' : 'Cancelled' }}
                 </span>
               </td>
             </tr>

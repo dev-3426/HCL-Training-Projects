@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
@@ -20,6 +20,16 @@ import { CancellationService } from '../../cancellation.service';
 })
 export class CancellationListComponent implements OnInit {
   private readonly cancellationService = inject(CancellationService);
+  private readonly destroyRef = inject(DestroyRef);
+  private closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.closeTimer) {
+        clearTimeout(this.closeTimer);
+      }
+    });
+  }
 
   requests = signal<CancellationResponse[]>([]);
   isLoading = signal(false);
@@ -110,6 +120,8 @@ export class CancellationListComponent implements OnInit {
   }
 
   submitReview(): void {
+    if (this.isReviewing() || this.reviewSuccess()) return;
+
     const request = this.selectedRequest();
     if (!request) return;
 
@@ -132,7 +144,7 @@ export class CancellationListComponent implements OnInit {
             ? 'Request approved successfully!'
             : 'Request rejected successfully.',
         );
-        setTimeout(() => {
+        this.closeTimer = setTimeout(() => {
           this.closeReviewModal();
           this.loadRequests();
         }, 1400);

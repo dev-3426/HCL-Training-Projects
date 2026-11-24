@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AuthService } from '../../../core/auth/auth.service';
@@ -14,8 +14,17 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class Register {
   private authService = inject(AuthService);
-
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
+  private redirectTimer: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.redirectTimer) {
+        clearTimeout(this.redirectTimer);
+      }
+    });
+  }
 
   registerRequest: RegisterStudentRequest = {
     name: '',
@@ -42,7 +51,7 @@ export class Register {
 
         this.isLoading = false;
 
-        setTimeout(() => {
+        this.redirectTimer = setTimeout(() => {
           this.router.navigate(['/login']);
         }, 4000);
       },

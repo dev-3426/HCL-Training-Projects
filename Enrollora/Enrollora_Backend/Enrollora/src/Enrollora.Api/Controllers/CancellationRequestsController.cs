@@ -46,6 +46,7 @@ public sealed class CancellationRequestsController(
         service.ReviewAsync(id, false, request, ct);
 
     private int CurrentStudentId() =>
-        int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)
-            ?? throw new UnauthorizedAccessException("Student identity is missing."));
+        int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var studentId)
+            ? studentId
+            : throw new UnauthorizedAccessException("Student identity is missing or invalid.");
 }

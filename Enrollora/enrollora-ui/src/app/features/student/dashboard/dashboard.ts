@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 
 import { CourseResponse } from '../../admin/courses/course.models';
 import { CourseService } from '../../admin/courses/course.service';
-import { EnrollmentResponse } from '../../enrollments/enrollment.models';
+import {EnrollmentResponse, EnrollmentStatus,} from '../../enrollments/enrollment.models';
 import { EnrollmentService } from '../../enrollments/enrollment.service';
 
 @Component({
@@ -51,18 +51,13 @@ export class Dashboard implements OnInit {
     };
 
     this.courseService
-      .getCourses(1, 6, { isActive: true })
+      .getCourses(1, 6, { isActive: true, availability: 'available' })
       .subscribe({
         next: (response) => {
-          const eligibleCourses = response.items.filter(
-            (course) => course.isActive && course.availableSeats > 0,
-          );
-          this.availableCourses.set(eligibleCourses);
-          this.availableCourseCount.set(
-            eligibleCourses.filter((course) => course.availableSeats > 0).length,
-          );
+          this.availableCourses.set(response.items);
+          this.availableCourseCount.set(response.totalRecords);
           this.openSeatCount.set(
-            eligibleCourses.reduce((total, course) => total + course.availableSeats, 0),
+            response.items.reduce((total, course) => total + course.availableSeats, 0),
           );
           courseRequestComplete = true;
           markComplete();
@@ -92,7 +87,7 @@ export class Dashboard implements OnInit {
           };
 
           this.enrollmentService
-            .getMyEnrollments(1, 1, { status: 1 })
+            .getMyEnrollments(1, 1, { status: EnrollmentStatus.Active })
             .subscribe({
               next: (activeResponse) => {
                 this.activeEnrollmentCount.set(activeResponse.totalRecords);
@@ -107,7 +102,7 @@ export class Dashboard implements OnInit {
             });
 
           this.enrollmentService
-            .getMyEnrollments(1, 1, { status: 0 })
+            .getMyEnrollments(1, 1, { status: EnrollmentStatus.Cancelled })
             .subscribe({
               next: (cancelledResponse) => {
                 this.cancelledEnrollmentCount.set(cancelledResponse.totalRecords);
@@ -131,9 +126,9 @@ export class Dashboard implements OnInit {
       });
   }
 
-  statusLabel(status: number): string {
-    return status === 1 ? 'Active' : 'Cancelled';
-  }
+statusLabel(status: number): string {
+  return status === EnrollmentStatus.Active? 'Active': 'Cancelled';
+}
 
   private getErrorMessage(error: HttpErrorResponse, fallback: string): string {
     const body = error.error;

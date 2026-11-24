@@ -23,17 +23,4 @@ internal static class QueryHelpers
             total,
             (int)Math.Ceiling(total / (double)paging.PageSize));
     }
-
-    public static IQueryable<T> ApplySort<T>(
-        IQueryable<T> query, string? sortBy, string? sortOrder,
-        IReadOnlyDictionary<string, Func<IQueryable<T>, bool, IQueryable<T>>> sorters,
-        string defaultSort)
-    {
-        var descending = string.Equals(sortOrder, "desc", StringComparison.OrdinalIgnoreCase);
-        var key = string.IsNullOrWhiteSpace(sortBy) ? defaultSort : sortBy.Trim().ToLowerInvariant();
-
-        return sorters.TryGetValue(key, out var sorter)
-            ? sorter(query, descending)
-            : sorters[defaultSort](query, descending);
-    }
 }

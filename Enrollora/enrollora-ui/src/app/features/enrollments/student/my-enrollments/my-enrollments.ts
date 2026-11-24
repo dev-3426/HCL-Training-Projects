@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { EnrollmentResponse } from '../../enrollment.models';
@@ -17,6 +17,16 @@ import { CancellationService } from '../../cancellation.service';
 export class MyEnrollments implements OnInit {
   private readonly enrollmentService = inject(EnrollmentService);
   private readonly cancellationService = inject(CancellationService);
+  private readonly destroyRef = inject(DestroyRef);
+  private closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.closeTimer) {
+        clearTimeout(this.closeTimer);
+      }
+    });
+  }
 
   enrollments = signal<EnrollmentResponse[]>([]);
   isLoading = signal(false);
@@ -80,6 +90,8 @@ export class MyEnrollments implements OnInit {
   }
 
   submitCancellation(): void {
+    if (this.isSubmitting() || this.submitSuccess()) return;
+
     const reason = this.cancelReason().trim();
     if (!reason) {
       this.submitError.set('Please provide a reason for cancellation.');
@@ -98,7 +110,7 @@ export class MyEnrollments implements OnInit {
         next: () => {
           this.isSubmitting.set(false);
           this.submitSuccess.set('Cancellation request submitted successfully!');
-          setTimeout(() => {
+          this.closeTimer = setTimeout(() => {
             this.closeModal();
             this.loadEnrollments();
           }, 1500);
